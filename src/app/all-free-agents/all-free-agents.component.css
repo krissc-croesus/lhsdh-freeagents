@@ -1,0 +1,16 @@
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+  font-size: 30px;
+}
+
+.mat-row:nth-child(even) {
+  background-color: rgb(62, 62, 62);
+}
+
+/*.mat-row:nth-child(odd) {
+  background-color: lightgray;
+}*/

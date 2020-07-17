@@ -1,33 +1,31 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <button mat-icon-button>
-      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+     <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
     <h1>DB Agents Libres</h1>
     <span class="menu-spacer"></span>
+    <div>
+      <a mat-button [routerLink]="'/accounts'"> Mes Agents Libres </a>
+      <a mat-button [routerLink]="'/create-account'"> Mes Contrats </a>
+      <a mat-button [routerLink]="'/contacts'"> Joueurs Disponibles </a>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>
-
 <mat-sidenav-container>
-  <mat-sidenav #sidenav
-    [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
-    fixedTopGap="56">
-    
+  <mat-sidenav #sidenav>
     <mat-nav-list>
       <a mat-list-item [routerLink]="'/accounts'"> Mes Agents Libres </a>
       <a mat-list-item [routerLink]="'/create-account'"> Calculateur Masse</a>
       <a mat-list-item [routerLink]="'/contacts'"> Joueurs Disponibles </a>
       <a mat-list-item [routerLink]="'/create-contact'"> Negociations </a>
-      <a mat-list-item (click)="sidenav.toggle()" href="">Logout</a>
+      <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
     </mat-nav-list>
-
   </mat-sidenav>
-  
   <mat-sidenav-content>
-    <div style="height: 95vh;">
-      <app-all-free-agents></app-all-free-agents>
+    <div style="height: 88vh;">
+
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
