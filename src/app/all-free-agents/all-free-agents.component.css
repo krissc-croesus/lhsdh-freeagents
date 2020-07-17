@@ -7,8 +7,22 @@ th.mat-sort-header-sorted {
   font-size: 30px;
 }
 
+.mat-column-minExpSal{
+  text-align: right;
+}
+
+.mat-column-maxExpSal{
+  text-align: right;
+}
+
 .mat-row:nth-child(even) {
   background-color: rgb(62, 62, 62);
+}
+
+.players-filter{
+  width: 100%;
+  padding-top: 16px;
+  padding-bottom: 3px;
 }
 
 /*.mat-row:nth-child(odd) {

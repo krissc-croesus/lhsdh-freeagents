@@ -16,13 +16,11 @@ import { MatSidenavModule} from '@angular/material/sidenav'
 import { MatListModule } from '@angular/material/list'
 import { AllFreeAgentsComponent } from './all-free-agents/all-free-agents.component';
 import { HttpClientModule } from '@angular/common/http';
-import { NavbarComponent } from './navbar/navbar.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    AllFreeAgentsComponent,
-    NavbarComponent
+    AllFreeAgentsComponent
   ],
   imports: [
     BrowserModule,

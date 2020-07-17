@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { PlayerResponse } from '../models/backend/playerResponse';
 import { Player } from '../models/player';
 import { Team } from '../models/team';
+import { SalaryScaleService } from './salary-scale.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlayerMapperService {
-  constructor() {}
+  constructor(private salaryScaleService: SalaryScaleService) {}
 
   playerResponseToPlayer(playerResponse: PlayerResponse): Player {
     var player: Player = new Player(
@@ -22,6 +23,7 @@ export class PlayerMapperService {
     player.position = playerResponse.position;
     player.team = this.mapTeam(playerResponse.team);
     player.status = this.mapStatus(playerResponse.isFA, playerResponse.age);
+    player.expectedSalary = this.salaryScaleService.getPlayerExpectedSalary(player);
     return player;
   }
 

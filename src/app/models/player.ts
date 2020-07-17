@@ -1,4 +1,11 @@
 import { Team } from './team';
+import { ExpectedSalary } from '../services/salary-scale.service';
+
+const formatter = new Intl.NumberFormat('fr-CA', {
+  style: 'currency',
+  currency: 'CAD',
+  minimumFractionDigits: 0
+})
 
 export class Player {
 	uniqueID: number;
@@ -11,10 +18,30 @@ export class Player {
 	position: string;
 	isFA: boolean;
 	age: number;
-  	status: string;
+  status: string;
+  expectedSalary: ExpectedSalary;
 
   constructor(	uniqueID: number, name: string){
     this.uniqueID = uniqueID;
     this.name = name;
   }
+
+  get teamCity(){
+    if(this.team)
+    {
+      return this.team.teamCity;
+    }
+    return null;
+  }
+
+  get expSalary(): string{
+    if(this.expectedSalary)
+    {
+      const min = formatter.format(this.expectedSalary.min);
+      const max = formatter.format(this.expectedSalary.max);
+      return min + " à " + max;
+    }
+    return "";
+  }
+
 }

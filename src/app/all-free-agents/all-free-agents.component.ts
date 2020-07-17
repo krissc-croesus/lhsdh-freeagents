@@ -11,7 +11,7 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class AllFreeAgentsComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['team', 'name', 'position', 'overall', 'age', 'status'];
+  displayedColumns: string[] = ['teamCity', 'name', 'position', 'OVK', 'age', 'status', 'expSalary'];
   dataSource: MatTableDataSource<Player> = new MatTableDataSource();
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
@@ -34,6 +34,11 @@ export class AllFreeAgentsComponent implements OnInit, AfterViewInit {
       }
       );
       this.dataSource.data = players as Player[];
+      this.dataSource.filterPredicate = (data: Player, filter: string) => {
+        console.log("Data.Name=" + data.name);
+        console.log("Filter=" + filter);
+        return (data.name.toLowerCase().includes(filter) || data.teamCity.toLowerCase().includes(filter));
+      };
     });
   }
 
@@ -44,6 +49,6 @@ export class AllFreeAgentsComponent implements OnInit, AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    }
+  }
 
 }
