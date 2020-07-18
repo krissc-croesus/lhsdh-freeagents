@@ -10,7 +10,7 @@ import { PlayerMapperService } from './player-mapper.service';
   providedIn: 'root'
 })
 export class PlayersService {
-  PLAYER_RESSOURCE_URL = 'http://lhsdbfreeagents-env.eba-i384bv22.us-east-2.elasticbeanstalk.com/players';
+  PLAYER_RESSOURCE_URL = 'https://lhsdbfreeagents-env.eba-i384bv22.us-east-2.elasticbeanstalk.com/players';
 
   constructor(
     private restClient: HttpClient,
