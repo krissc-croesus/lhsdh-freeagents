@@ -1,0 +1,18 @@
+.background-nhl{
+  background-image: url("/assets/img/backgrounds/NHL20_UltimateBG_2.jpg");
+  height: 95vh;
+}
+
+.title{
+  font-size: 80px;
+  font-weight: bolder;
+  line-height: 200px;
+  height: 200px;
+  text-align: center;
+}
+
+.center{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

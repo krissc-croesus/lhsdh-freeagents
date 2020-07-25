@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,15 +18,34 @@ import { MatListModule } from '@angular/material/list'
 import { AllFreeAgentsComponent } from './all-free-agents/all-free-agents.component';
 import { HttpClientModule } from '@angular/common/http';
 
+import { NgxSpinnerModule } from "ngx-spinner";
+import { LoginComponent } from './views/login/login.component';
+import { MyFreeAgentsComponent } from './views/my-free-agents/my-free-agents.component';
+import { MySalaryCapComponent } from './views/my-salary-cap/my-salary-cap.component';
+import { NegotiationsComponent } from './views/negotiations/negotiations.component';
+
+/* Add Amplify imports */
+import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
+import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
+import { HttpInterceptorProviders} from './interceptors/interceptor-provider';
+import { AuthGuard } from './auth.guard';
+
 @NgModule({
   declarations: [
     AppComponent,
-    AllFreeAgentsComponent
+    AllFreeAgentsComponent,
+    LoginComponent,
+    MyFreeAgentsComponent,
+    MySalaryCapComponent,
+    NegotiationsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    //MAT
     MatButtonModule,
     MatTableModule,
     MatChipsModule,
@@ -36,9 +56,15 @@ import { HttpClientModule } from '@angular/common/http';
     MatSortModule,
     MatSidenavModule,
     MatListModule,
-    HttpClientModule
+    // Amplify
+    AmplifyUIAngularModule,
+    NgxSpinnerModule
   ],
-  providers: [],
+  providers: [
+    AmplifyService,
+    AuthGuard,
+    HttpInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
