@@ -22,8 +22,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatBadgeModule} from '@angular/material/badge';
 
-
-import { NgxSpinnerModule } from "ngx-spinner";
 import { LoginComponent } from './views/login/login.component';
 import { MyFreeAgentsComponent } from './views/my-free-agents/my-free-agents.component';
 import { MySalaryCapComponent } from './views/my-salary-cap/my-salary-cap.component';
@@ -74,8 +72,7 @@ import { TablePlayerDetailComponent } from './widgets/table-player-detail/table-
     MatTooltipModule,
     MatBadgeModule,
     // Amplify
-    AmplifyUIAngularModule,
-    NgxSpinnerModule
+    AmplifyUIAngularModule
   ],
   providers: [
     AmplifyService,
