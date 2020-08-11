@@ -1,0 +1,186 @@
+<div class="container-xl">
+
+  <div class="cap-summary mat-elevation-z8">
+    <h1>{{currentTeamName | uppercase}}</h1>
+    <img class="team-logo" src="{{currentTeamLogoURL}}">
+    <h3>MASSE SALARIALE ACTUELLE:<span class="cap-value">{{getTotalCap() | currency:'CAD':'symbol-narrow':'1.0-2':'fr-CA'}}</span></h3>
+    <h3>MASSE SALARIALE ATTENDUE:<span class="cap-value">{{getTotalExpCap() | currency:'CAD':'symbol-narrow':'1.0-2':'fr-CA'}}</span></h3>
+    <br/>
+    <h4>ESPACE ACTUELLEMENT DISPONIBLE:<span class="cap-value">{{getTotalFreeSpace() | currency:'CAD':'symbol-narrow':'1.0-2':'fr-CA'}}</span></h4>
+    <h4>ESPACE DISPONIBLE ESPÉRÉ:<span class="cap-value">{{getTotalExpFreeSpace() | currency:'CAD':'symbol-narrow':'1.0-2':'fr-CA'}}</span></h4>
+  </div>
+
+  <h1 class="table-title">Attaque</h1>
+  <table id="forward-table" mat-table [dataSource]="forwardDataSource" class="mat-elevation-z8">
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> Rang </th>
+      <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Nom </th>
+      <td mat-cell *matCellDef="let player">
+        {{player.name}}
+      </td>
+      <td mat-footer-cell *matFooterCellDef> TOTAL TOP 12</td>
+    </ng-container>
+
+    <ng-container matColumnDef="OVK">
+      <th mat-header-cell *matHeaderCellDef> Overall </th>
+      <td mat-cell *matCellDef="let player"> {{player.OVK}} </td>
+      <td mat-footer-cell *matFooterCellDef> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="statut">
+      <th mat-header-cell *matHeaderCellDef> Statut </th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="element.status === 'UFA'">
+          <button mat-flat-button color="primary">{{element.status}}</button>
+        </div>
+        <div *ngIf="element.status === 'RFA'">
+          <button mat-flat-button color="accent">{{element.status}}</button>
+        </div>
+        <div *ngIf="element.status === '35+'">
+          <button mat-flat-button color="warn">{{element.status}}</button>
+        </div>
+        <div *ngIf="element.status === 'Signed'">
+        </div>
+      </td>
+      <td mat-footer-cell *matFooterCellDef> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="salary">
+      <th mat-header-cell *matHeaderCellDef> Salaire </th>
+      <td mat-cell *matCellDef="let player" [ngStyle]="{'background-color':'getColorPlayer();'}"> {{player.salary | number}} </td>
+      <td mat-footer-cell *matFooterCellDef> {{getFwdTop12Cap() | currency:'CAD':'symbol-narrow':'1.0-2':'fr-CA'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expectedSalary">
+      <th mat-header-cell *matHeaderCellDef> Attendu </th>
+      <td mat-cell *matCellDef="let player">{{displayExpectedSalary(player)| number}}</td>
+      <td mat-footer-cell *matFooterCellDef> {{getFwdTop12ExpCap() | currency:'CAD':'symbol-narrow':'1.0-2':'fr-CA'}}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+  </table>
+
+  <h1 class="table-title">Défense</h1>
+  <table id="defense-table" mat-table [dataSource]="defenseDataSource" class="mat-elevation-z8">
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> Rang </th>
+      <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef > Nom </th>
+      <td mat-cell *matCellDef="let player"> {{player.name}}</td>
+      <td mat-footer-cell *matFooterCellDef> TOTAL TOP 6</td>
+    </ng-container>
+
+    <ng-container matColumnDef="OVK">
+      <th mat-header-cell *matHeaderCellDef> Overall </th>
+      <td mat-cell *matCellDef="let player"> {{player.OVK}} </td>
+      <td mat-footer-cell *matFooterCellDef> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="statut">
+      <th mat-header-cell *matHeaderCellDef> Statut </th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="element.status === 'UFA'">
+          <button mat-flat-button color="primary">{{element.status}}</button>
+        </div>
+        <div *ngIf="element.status === 'RFA'">
+          <button mat-flat-button color="accent">{{element.status}}</button>
+        </div>
+        <div *ngIf="element.status === '35+'">
+          <button mat-flat-button color="warn">{{element.status}}</button>
+        </div>
+        <div *ngIf="element.status === 'Signed'">
+        </div>
+      </td>
+      <td mat-footer-cell *matFooterCellDef> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="salary">
+      <th mat-header-cell *matHeaderCellDef> Salaire </th>
+      <td mat-cell *matCellDef="let player"> {{player.salary | number}} </td>
+      <td mat-footer-cell *matFooterCellDef> {{getDefTop6Cap() | currency:'CAD':'symbol-narrow':'1.0-2':'fr-CA'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expectedSalary">
+      <th mat-header-cell *matHeaderCellDef> Attendu </th>
+      <td mat-cell *matCellDef="let player">{{displayExpectedSalary(player) | number}}</td>
+      <td mat-footer-cell *matFooterCellDef> {{getDefTop6ExpCap() | currency:'CAD':'symbol-narrow':'1.0-2':'fr-CA'}}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+  </table>
+
+  <h1 class="table-title">Gardiens</h1>
+  <table  id="goalie-table" mat-table [dataSource]="goalieDataSource" class="mat-elevation-z8">
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> Rang </th>
+      <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Nom </th>
+      <td mat-cell *matCellDef="let player"> {{player.name}} </td>
+      <td mat-footer-cell *matFooterCellDef> TOTAL TOP 2</td>
+    </ng-container>
+
+    <ng-container matColumnDef="OVK">
+      <th mat-header-cell *matHeaderCellDef> Overall </th>
+      <td mat-cell *matCellDef="let player"> {{player.OVK}} </td>
+      <td mat-footer-cell *matFooterCellDef> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="statut">
+      <th mat-header-cell *matHeaderCellDef> Statut </th>
+      <td mat-cell *matCellDef="let element">
+        <div *ngIf="element.status === 'UFA'">
+          <button mat-flat-button color="primary">{{element.status}}</button>
+        </div>
+        <div *ngIf="element.status === 'RFA'">
+          <button mat-flat-button color="accent">{{element.status}}</button>
+        </div>
+        <div *ngIf="element.status === '35+'">
+          <button mat-flat-button color="warn">{{element.status}}</button>
+        </div>
+        <div *ngIf="element.status === 'Signed'">
+        </div>
+      </td>
+      <td mat-footer-cell *matFooterCellDef> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="salary">
+      <th mat-header-cell *matHeaderCellDef> Salaire </th>
+      <td mat-cell *matCellDef="let player"> {{player.salary | number}} </td>
+      <td mat-footer-cell *matFooterCellDef> {{getGoalTop2Cap() | currency:'CAD':'symbol-narrow':'1.0-2':'fr-CA'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expectedSalary">
+      <th mat-header-cell *matHeaderCellDef> Attendu </th>
+      <td mat-cell *matCellDef="let player">{{displayExpectedSalary(player) | number}}</td>
+      <td mat-footer-cell *matFooterCellDef> {{getGoalTop2ExpCap() | currency:'CAD':'symbol-narrow':'1.0-2':'fr-CA'}}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+  </table>
+
+</div>

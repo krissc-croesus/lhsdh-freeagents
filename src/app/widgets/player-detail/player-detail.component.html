@@ -1,0 +1,34 @@
+<mat-card class="player-card mat-elevation-z8">
+  <mat-chip-list style="float: right;">
+    <mat-chip color="primary" selected>{{player.status}}</mat-chip>
+  </mat-chip-list>
+  <mat-card-header>
+    <div mat-card-avatar class="header-logo" [style.backgroundImage]="getHeaderBackgroundImageUrl()"></div>
+    <mat-card-title>{{player.name}} </mat-card-title>
+    <mat-card-subtitle>{{player.status}}</mat-card-subtitle>
+  </mat-card-header>
+
+  <img mat-card-image class="player-avatar" src={{getPlayerFaceImage()}} alt="Photo du joueur">
+  <mat-card-content>
+    <mat-list role="list">
+      <mat-list-item role="listitem">Pos: {{player.position}}</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item role="listitem">Age: {{player.age}}</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item role="listitem">Overall: {{player.OVK}}</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item role="listitem">Bracket: {{player.expSalary}}</mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-flat-button color="primary" class="action-btn">
+      <mat-icon>history_edu</mat-icon>
+      Offrir un contrat
+    </button>
+    <button mat-flat-button color="primary" class="action-btn">
+      <mat-icon>clear</mat-icon>
+      Libérer
+    </button>
+  </mat-card-actions>
+</mat-card>

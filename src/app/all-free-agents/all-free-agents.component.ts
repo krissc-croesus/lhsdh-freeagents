@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 import { Player } from '../models/player';
 import { PlayersService } from '../services/players.service';
 import {MatSort} from '@angular/material/sort';
@@ -7,12 +8,19 @@ import {MatTableDataSource} from '@angular/material/table';
 @Component({
   selector: 'app-all-free-agents',
   templateUrl: './all-free-agents.component.html',
-  styleUrls: ['./all-free-agents.component.css']
+  styleUrls: ['./all-free-agents.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
+    ])],
 })
 export class AllFreeAgentsComponent implements OnInit, AfterViewInit {
 
   displayedColumns: string[] = ['teamCity', 'name', 'position', 'OVK', 'age', 'status', 'expSalary'];
   dataSource: MatTableDataSource<Player> = new MatTableDataSource();
+  expandedElement: Player | null;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
@@ -35,8 +43,6 @@ export class AllFreeAgentsComponent implements OnInit, AfterViewInit {
       );
       this.dataSource.data = players as Player[];
       this.dataSource.filterPredicate = (data: Player, filter: string) => {
-        console.log("Data.Name=" + data.name);
-        console.log("Filter=" + filter);
         return (data.name.toLowerCase().includes(filter) || data.teamCity.toLowerCase().includes(filter));
       };
     });

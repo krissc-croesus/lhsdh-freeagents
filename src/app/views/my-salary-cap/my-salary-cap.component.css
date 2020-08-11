@@ -1,0 +1,38 @@
+table {
+  width: 100%;
+}
+
+.cap-summary{
+  margin-top: 2%;
+  margin-bottom: 2%;
+  border-radius: 20px;
+  padding: 2%;
+  text-align: center;
+}
+
+.team-logo{
+  width: 30%;
+}
+
+.cap-value{
+  margin-left: 5px;
+}
+
+.table-title{
+  margin-top: 3%;
+  margin-bottom: 1%;
+}
+
+#defense-table .mat-row:nth-child(-n+6) {
+  background-color: rgba(123, 31, 162, 0.3);
+
+}
+
+#forward-table .mat-row:nth-child(-n+12) {
+  background-color: rgba(123, 31, 162, 0.3);
+
+}
+
+#goalie-table .mat-row:nth-child(-n+2) {
+  background-color: rgba(123, 31, 162, 0.3);
+}
