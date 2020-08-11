@@ -21,6 +21,7 @@ export class PlayerMapperService {
     player.contract = playerResponse.contract;
     player.isFA = playerResponse.isFA;
     player.position = playerResponse.position;
+    player.salary = playerResponse.salary;
     player.team = this.mapTeam(playerResponse.team);
     player.status = this.mapStatus(playerResponse.isFA, playerResponse.age);
     player.expectedSalary = this.salaryScaleService.getPlayerExpectedSalary(player);
