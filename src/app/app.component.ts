@@ -4,6 +4,7 @@ import { Auth, Hub } from 'aws-amplify';
 import { Router } from '@angular/router';
 import { PlayerMapperService } from './services/player-mapper.service';
 import { Team } from './models/team';
+import { Player } from './models/player';
 
 @Component({
   selector: 'app-root',
@@ -68,10 +69,19 @@ export class AppComponent implements OnInit, OnDestroy {
   setTeamLogoURL(teamID: number)
   {
     const team: Team = this.playerMapperService.mapTeam(+teamID);
-
-    console.log(team);
-
     this.connectedUsername= team.teamCity + " " + team.teamName;
     this.teamLogoURL = "https://www-league.nhlstatic.com/images/logos/teams-current-primary-dark/" + team.logoId + ".svg"
+  }
+
+  getNegociationsCount()
+  {
+    const storageKey =  "NEGOCIATIONS";
+    let currentNegociations: Player[] = [];
+    let savedNegociations = JSON.parse(localStorage.getItem(storageKey));
+
+    if(savedNegociations != null){
+      currentNegociations = savedNegociations;
+    }
+    return currentNegociations.length;
   }
 }

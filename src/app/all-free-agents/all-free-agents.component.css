@@ -24,3 +24,24 @@ th.mat-sort-header-sorted {
 /*.mat-row:nth-child(odd) {
   background-color: lightgray;
 }*/
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}

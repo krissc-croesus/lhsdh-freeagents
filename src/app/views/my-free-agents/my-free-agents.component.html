@@ -1,1 +1,89 @@
-<p>my-free-agents works!</p>
+<div class="container-xl">
+  <h1 class="display-1 page-title"> Mes Agents Libres</h1>
+  <mat-divider></mat-divider>
+  <br />
+  <h2>Instructions:</h2>
+  <p>Cette page contient tous vos agents libres(UFA, RFA et 35+)</p>
+  <p>Durant la première phase vous ne devez PAS faire d'offres à vos RFA et 35+.</p>
+  <p>Vous DEVEZ faire des offres à vos UFA qui se trouvent sur cette page (ou les libérer).</p>
+  <p>Vous pouvez aussi faire des offres au UFA et RFA des autres équipes dans la page "Joueurs Disponibles".</p>
+  <mat-divider></mat-divider>
+  <br />
+
+  <div *ngIf="rfas.length != 0">
+    <h2>RFA - Agents libres avec restrictions</h2>
+    <mat-chip-list>
+      <mat-chip color="accent" selected>RFA</mat-chip>
+    </mat-chip-list>
+  </div>
+  <div class="row">
+    <div class="card mat-elevation-z8 player-card" *ngFor="let rfa of rfas">
+      <div class="card-body">
+        <mat-chip-list style="float: right;">
+          <mat-chip color="accent" selected>{{rfa.status}}</mat-chip>
+        </mat-chip-list>
+        <h2 class="card-title">{{rfa.name}}</h2>
+        <mat-divider></mat-divider>
+        <mat-list role="list">
+          <mat-list-item role="listitem">Pos: {{rfa.position}}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item role="listitem">Age: {{rfa.age}}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item role="listitem">Overall: {{rfa.OVK}}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item role="listitem">Bracket: {{rfa.expSalary}}</mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+        <button mat-button color="accent">
+          En attente d'offres des autres équipes
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="trenteCinq.length != 0">
+    <mat-divider></mat-divider>
+    <br />
+    <h2>35+ - Agents libres de 35 ans ou plus</h2>
+    <mat-chip-list>
+      <mat-chip color="warn" selected>35+</mat-chip>
+    </mat-chip-list>
+  </div>
+  <div class="row" *ngIf="trenteCinq.length != 0">
+    <div class="card mat-elevation-z8 player-card" *ngFor="let agent of trenteCinq">
+      <div class="card-body">
+        <mat-chip-list style="float: right;">
+          <mat-chip color="warn" selected>{{agent.status}}</mat-chip>
+        </mat-chip-list>
+        <h2 class="card-title">{{agent.name}}</h2>
+        <mat-divider></mat-divider>
+        <mat-list role="list">
+          <mat-list-item role="listitem">Pos: {{agent.position}}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item role="listitem">Age: {{agent.age}}</mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item role="listitem">Overall: {{agent.OVK}}</mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+        <button mat-button color="warn">
+          Signature des 35+ ultérieure
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <mat-divider></mat-divider>
+    <br />
+    <h2>UFA - Agents libres sans restriction</h2>
+    <mat-chip-list>
+      <mat-chip color="primary" selected>UFA</mat-chip>
+    </mat-chip-list>
+  </div>
+  <div>
+    <app-player-detail *ngFor="let ufa of ufas" [player]=ufa></app-player-detail>
+  </div>
+
+
+
+</div>
