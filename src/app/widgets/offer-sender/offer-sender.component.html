@@ -1,0 +1,10 @@
+<mat-slider class="offer-slider" color="accent" [max]="sliderMax" [min]="sliderMin" [step]="sliderStep" [thumbLabel]="false"
+  [tickInterval]="10000"  [displayWith]="formatLabel" [(ngModel)]="offerValue">
+</mat-slider>
+
+<mat-form-field class="offer-textbox">
+  <mat-label>Offre</mat-label>
+  <input matInput type="number" [formControl]='offerTextBox' [max]="sliderMax" [min]="sliderMin" [(ngModel)]="offerValue">
+  <span matSuffix>$&nbsp;</span>
+  <mat-error *ngIf="offerTextBox.invalid">{{getErrorMessage()}}</mat-error>
+</mat-form-field>

@@ -22,7 +22,8 @@
     </mat-list>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-flat-button color="primary" class="action-btn">
+    <app-offer-sender #offerSender [player]=player></app-offer-sender>
+    <button mat-flat-button color="primary" class="action-btn" (click)="submitOffer()">
       <mat-icon>history_edu</mat-icon>
       Offrir un contrat
     </button>

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Player } from 'src/app/models/player';
+import { OfferSenderComponent } from '../offer-sender/offer-sender.component';
 
 @Component({
   selector: 'app-player-detail',
@@ -8,6 +9,7 @@ import { Player } from 'src/app/models/player';
 })
 export class PlayerDetailComponent implements OnInit {
   @Input() player: Player;
+  @ViewChild('offerSender') offerSenderWidget: OfferSenderComponent;
 
   constructor() { }
 
@@ -30,5 +32,17 @@ export class PlayerDetailComponent implements OnInit {
 
   getBlendUrl(){
     return `url(${this.getPlayerFaceImage()}), url("/assets/img/backgrounds/NHL20_UltimateBG_2.jpg")`;
+  }
+
+  submitOffer(){
+
+    if(this.offerSenderWidget != null){
+      if(this.offerSenderWidget.getOfferTextBox().valid){
+        var contractOffer = this.offerSenderWidget.getOfferTextBox().value;
+
+        window.alert("Offrir une offre de " + contractOffer + " à " + this.player.name);
+      }
+    }
+
   }
 }

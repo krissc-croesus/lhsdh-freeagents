@@ -46,7 +46,7 @@ export class MySalaryCapComponent implements OnInit {
 
   splitPlayers(team : number)
   {
-    this.playerService.getPlayersFromTeam(team, false).subscribe((players) => {
+    this.playerService.getPlayersFromTeam(4, false).subscribe((players) => {
 
       for (let player of players)
       {

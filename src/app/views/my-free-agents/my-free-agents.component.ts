@@ -39,6 +39,8 @@ export class MyFreeAgentsComponent implements OnInit {
               break;
           }
         }
+      }, (error) => {
+          window.alert(error);
       });
     })
     .catch(() => console.log('Not signed in'));
