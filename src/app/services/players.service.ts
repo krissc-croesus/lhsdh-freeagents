@@ -52,6 +52,4 @@ export class PlayersService {
         return playersArray;
       }));
   }
-
-
 }

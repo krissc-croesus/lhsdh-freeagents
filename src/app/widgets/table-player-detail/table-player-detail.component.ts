@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Player } from 'src/app/models/player';
+import { AlertServiceService } from 'src/app/services/alert-service.service';
 
 @Component({
   selector: 'app-table-player-detail',
@@ -8,8 +9,9 @@ import { Player } from 'src/app/models/player';
 })
 export class TablePlayerDetailComponent implements OnInit {
   @Input() player: Player;
+  @Input() connectedTeam: number;
 
-  constructor() {}
+  constructor(private alertService: AlertServiceService) {}
 
   ngOnInit(): void {}
 
@@ -33,24 +35,26 @@ export class TablePlayerDetailComponent implements OnInit {
   }
 
   isButtonDisabled() {
-    return this.player.status === '35+';
+    return this.player.status === '35+' || this.player.team.teamID == this.connectedTeam;
   }
 
   onStartNegociations() {
-    const storageKey = 'NEGOCIATIONS';
-    let currentNegociations: Player[] = [];
-    let savedNegociations = JSON.parse(localStorage.getItem(storageKey));
+    const storageKey = 'WANTED';
+    var currentNegociations = [];
+    var savedNegociations = JSON.parse(localStorage.getItem(storageKey));
 
     if (savedNegociations != null) {
       currentNegociations = savedNegociations;
     }
 
-    for (const player of currentNegociations) {
-      if (this.player.uniqueID === player.uniqueID) {
+    for (const playerId of currentNegociations) {
+      if (this.player.uniqueID === playerId) {
+        this.alertService.showErrorMsg("Ce joueur est déjà dans votre liste");
         return;
       }
     }
-    currentNegociations.push(this.player);
+    currentNegociations.push(this.player.uniqueID);
     localStorage.setItem(storageKey, JSON.stringify(currentNegociations));
+    this.alertService.showConfirmMsg(this.player.name + " a été ajouté à votre liste de négociations.");
   }
 }

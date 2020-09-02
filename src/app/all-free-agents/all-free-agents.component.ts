@@ -10,6 +10,7 @@ import { Player } from '../models/player';
 import { PlayersService } from '../services/players.service';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Auth } from 'aws-amplify';
 
 @Component({
   selector: 'app-all-free-agents',
@@ -39,8 +40,16 @@ export class AllFreeAgentsComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Player> = new MatTableDataSource();
   expandedElement: Player | null;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  connectedUserTeam: number = 0;
 
-  constructor(private playerService: PlayersService) {}
+  constructor(private playerService: PlayersService) {
+    Auth.currentUserInfo()
+    .then((info) => {
+      const team = info.attributes['custom:team'];
+      this.connectedUserTeam = +team;
+    })
+    .catch(() => console.log('Not signed in'));
+  }
 
   ngOnInit(): void {
     this.playerService.getFreeAgents().subscribe(
@@ -58,7 +67,8 @@ export class AllFreeAgentsComponent implements OnInit, AfterViewInit {
         this.dataSource.filterPredicate = (data: Player, filter: string) => {
           return (
             data.name.toLowerCase().includes(filter) ||
-            data.teamCity.toLowerCase().includes(filter)
+            data.teamCity.toLowerCase().includes(filter) ||
+            data.position.toLowerCase().includes(filter)
           );
         };
       },

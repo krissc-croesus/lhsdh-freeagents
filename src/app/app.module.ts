@@ -22,6 +22,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatSelectModule} from '@angular/material/select';
 
 
 import { LoginComponent } from './views/login/login.component';
@@ -41,6 +43,7 @@ import { registerLocaleData } from '@angular/common';
 import localeFr from "@angular/common/locales/fr";
 import { TablePlayerDetailComponent } from './widgets/table-player-detail/table-player-detail.component';
 import { OfferSenderComponent } from './widgets/offer-sender/offer-sender.component';
+import { NegoPlayerDetailComponent } from './widgets/nego-player-detail/nego-player-detail.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,8 @@ import { OfferSenderComponent } from './widgets/offer-sender/offer-sender.compon
     NegotiationsComponent,
     PlayerDetailComponent,
     TablePlayerDetailComponent,
-    OfferSenderComponent
+    OfferSenderComponent,
+    NegoPlayerDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -77,6 +81,8 @@ import { OfferSenderComponent } from './widgets/offer-sender/offer-sender.compon
     MatTooltipModule,
     MatBadgeModule,
     MatSliderModule,
+    MatSnackBarModule,
+    MatSelectModule,
     // Amplify
     AmplifyUIAngularModule
   ],

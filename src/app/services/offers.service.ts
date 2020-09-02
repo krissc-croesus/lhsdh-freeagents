@@ -3,30 +3,72 @@ import { Player } from '../models/player';
 import { Offer } from '../models/offer';
 import { Auth } from 'aws-amplify';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OffersService {
+  OFFERS_RESSOURCE_URL = 'https://lhsdb-fa-api.piriwin.com/offers';
 
-  OFFERS_RESSOURCE_URL = 'https://lhsdb-fa.us-east-2.elasticbeanstalk.com/players';
+  constructor(private restClient: HttpClient) {}
 
-  constructor( private restClient: HttpClient) { }
+  async sendNewContractOffer(
+    player: Player,
+    amount: number,
+    isOwner: boolean
+  ): Promise<boolean> {
+    var success: boolean = false;
 
-  sendNewContractOffer(player: Player, amount: number){
+    await Auth.currentUserInfo()
+      .then((info) => {
+        const team = info.attributes['custom:team'];
+        const newOffer: Offer = new Offer(
+          player.uniqueID,
+          team,
+          info.username,
+          isOwner,
+          amount,
+          player.status
+        );
 
-    Auth.currentUserInfo()
-    .then((info) => {
-      const team = info.attributes['custom:team'];
+        this.restClient
+          .post(this.OFFERS_RESSOURCE_URL, newOffer, { responseType: 'text' })
+          .subscribe(
+            (data) => {
+              console.log('Success data=' + data);
+              success = true;
+            },
+            (error) => {
+              console.error('There was an error!' + error, error.message);
+              success = false;
+            }
+          );
+      })
+      .catch(() => {
+        console.log('Not signed in');
+      });
 
-      const newOffer: Offer = new Offer(player.uniqueID, team, player.team.teamID, amount, player.status);
+    return false;
+  }
 
-      this.restClient.post(this.OFFERS_RESSOURCE_URL, newOffer ).subscribe({
-        next: data => console.log(data),
-        error: error => console.error('There was an error!', error)
-    });
-    })
-    .catch(() => console.log('Not signed in'));
+  getOffersByTeam(teamId: number): Observable<Offer[]> {
+    return this.restClient
+      .get<Offer>(this.OFFERS_RESSOURCE_URL + '/teams/' + teamId)
+      .pipe(
+        map((responseData) => {
+          const playersArray: Offer[] = [];
 
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              const offerResponse = { ...responseData[key] };
+              // const mappedPlayer = this.playerMapper.playerResponseToPlayer(playerResponse);
+              playersArray.push(offerResponse);
+            }
+          }
+          return playersArray;
+        })
+      );
   }
 }

@@ -1,4 +1,4 @@
-<mat-slider class="offer-slider" color="accent" [max]="sliderMax" [min]="sliderMin" [step]="sliderStep" [thumbLabel]="false"
+<mat-slider class="offer-slider" color="{{getSliderColor()}}" [max]="sliderMax" [min]="sliderMin" [step]="sliderStep" [thumbLabel]="false"
   [tickInterval]="10000"  [displayWith]="formatLabel" [(ngModel)]="offerValue">
 </mat-slider>
 

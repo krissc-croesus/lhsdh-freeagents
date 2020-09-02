@@ -1,16 +1,18 @@
 export class Offer{
   playerId: number;
-  offeredBy: number;
-  owner: number;
+  teamId: number;
+  offeredBy: string;
+  isOwner: boolean;
   amount: number;
-  type: string;
+  playerType: string;
 
-  constructor(playerId: number, offeredBy: number, owner: number, amount: number, type: string){
+  constructor(playerId: number, teamId: number, offeredBy: string, isOwner: boolean, amount: number, playerType: string){
     this.playerId = playerId;
+    this.teamId = teamId;
     this.offeredBy = offeredBy;
-    this.owner = owner;
+    this.isOwner = isOwner;
     this.amount = amount,
-    this.type = type;
+    this.playerType = playerType;
   }
 
 }

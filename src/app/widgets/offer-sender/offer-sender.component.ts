@@ -27,6 +27,10 @@ export class OfferSenderComponent implements OnInit {
       if (this.player.status === 'UFA') {
         this.offerValue = this.player.expectedSalary.max;
       }
+      else{
+        var diff = (this.player.expectedSalary.max - this.player.expectedSalary.min)/2;
+        this.offerValue = this.player.expectedSalary.min + diff;
+      }
     }
 
     //[Validators.required, Validators.max(this.sliderMax), Validators.min(this.sliderMin)]
@@ -50,5 +54,22 @@ export class OfferSenderComponent implements OnInit {
 
   getOfferTextBox() : FormControl{
     return this.offerTextBox;
+  }
+
+  getSliderColor(){
+    if(this.player != null){
+      if(this.player.status === 'UFA')
+      {
+        return 'primary';
+      }
+      if(this.player.status === 'RFA')
+      {
+        return 'accent';
+      }
+      if(this.player.status === '35+')
+      {
+        return 'warn';
+      }
+    }
   }
 }
