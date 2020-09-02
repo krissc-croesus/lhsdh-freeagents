@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,7 +10,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSidenavModule } from '@angular/material/sidenav'
@@ -19,8 +19,12 @@ import { MatListModule } from '@angular/material/list'
 import { AllFreeAgentsComponent } from './all-free-agents/all-free-agents.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatGridListModule } from '@angular/material/grid-list';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatBadgeModule} from '@angular/material/badge';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatSelectModule} from '@angular/material/select';
+
 
 import { LoginComponent } from './views/login/login.component';
 import { MyFreeAgentsComponent } from './views/my-free-agents/my-free-agents.component';
@@ -38,6 +42,8 @@ import { AuthGuard } from './auth.guard';
 import { registerLocaleData } from '@angular/common';
 import localeFr from "@angular/common/locales/fr";
 import { TablePlayerDetailComponent } from './widgets/table-player-detail/table-player-detail.component';
+import { OfferSenderComponent } from './widgets/offer-sender/offer-sender.component';
+import { NegoPlayerDetailComponent } from './widgets/nego-player-detail/nego-player-detail.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +54,9 @@ import { TablePlayerDetailComponent } from './widgets/table-player-detail/table-
     MySalaryCapComponent,
     NegotiationsComponent,
     PlayerDetailComponent,
-    TablePlayerDetailComponent
+    TablePlayerDetailComponent,
+    OfferSenderComponent,
+    NegoPlayerDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +64,7 @@ import { TablePlayerDetailComponent } from './widgets/table-player-detail/table-
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     //MAT
     MatButtonModule,
     MatTableModule,
@@ -71,6 +80,9 @@ import { TablePlayerDetailComponent } from './widgets/table-player-detail/table-
     MatGridListModule,
     MatTooltipModule,
     MatBadgeModule,
+    MatSliderModule,
+    MatSnackBarModule,
+    MatSelectModule,
     // Amplify
     AmplifyUIAngularModule
   ],

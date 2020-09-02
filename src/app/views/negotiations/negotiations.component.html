@@ -1,3 +1,32 @@
-<div class="container-fluid">
-  <app-player-detail *ngFor="let player of players" [player]=player></app-player-detail>
+<div class="container">
+  <h1 class="display-1 page-title"> Négociations</h1>
+  <mat-divider></mat-divider>
+  <br />
+  <h2>Instructions:</h2>
+    <p>Cette page vous permet d'offrir des contrats aux agents libres(UFA, RFA) des autres équipes.</p>
+    <p>Vous avez le droit de faire un total de <b>30 offres</b> maximum.</p>
+    <p>Pour entamer des négociations dans cette page vous devez d'abord aller dans la page "Joueurs Disponibles".</p>
+    <p>Puis, choisir joueur qui vous intéresse dans la table et cliquer sur le bouton "Entamer des négociations".</p>
+    <p>Ensuite, vous pourrez offrir le contrat désiré à chaque joueur tout en respectant leur bracket de la charte.</p>
+    <p><b>ATTENTION!</b> pour les RFA vous devez posséder les compensations avant de faire une offre.</p>
+  <mat-divider></mat-divider>
+  <br />
+  <div class="ufa-container" *ngIf="playersWithOffer.length != 0">
+    <h3>Joueurs auxquels vous avez proposé un contrat ({{playersWithOffer.length}} sur 30):</h3>
+    <div class="row">
+      <div class="card mat-elevation-z8 player-card" *ngFor="let signed of playersWithOffer">
+        <div class="card-body">
+          <mat-chip-list style="float: right;">
+            <mat-chip color="{{getChipColor(signed)}}" selected>{{signed.status}}</mat-chip>
+          </mat-chip-list>
+          <h2 class="card-title">{{signed.name}}</h2>
+          <mat-divider></mat-divider>
+          <button mat-button color="basic">
+            Contrat offert de {{getContractFor(signed.uniqueID)}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-nego-player-detail *ngFor="let player of wantedPlayers" [player]=player [nbOffers]=playersWithOffer.length></app-nego-player-detail>
 </div>

@@ -59,7 +59,7 @@
         <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
           <div class="example-element-detail"
            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-           <app-table-player-detail style="width: 100%;" [player]="element"></app-table-player-detail>
+           <app-table-player-detail style="width: 100%;" [player]="element" [connectedTeam]="connectedUserTeam" ></app-table-player-detail>
           </div>
         </td>
       </ng-container>

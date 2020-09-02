@@ -75,8 +75,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   getNegociationsCount()
   {
-    const storageKey =  "NEGOCIATIONS";
-    let currentNegociations: Player[] = [];
+    const storageKey =  "WANTED";
+    let currentNegociations = [];
     let savedNegociations = JSON.parse(localStorage.getItem(storageKey));
 
     if(savedNegociations != null){
