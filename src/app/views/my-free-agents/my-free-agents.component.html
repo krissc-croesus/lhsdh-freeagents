@@ -1,4 +1,4 @@
-<div class="container-xl">
+<div class="container">
   <h1 class="display-1 page-title"> Mes Agents Libres</h1>
   <mat-divider></mat-divider>
   <br />
@@ -80,7 +80,25 @@
       <mat-chip color="primary" selected>UFA</mat-chip>
     </mat-chip-list>
   </div>
-  <div>
+  <div class="ufa-container" *ngIf="playersWithOffer.length != 0">
+    <h3>Joueurs auxquels vous avez proposé un contrat:</h3>
+    <div class="row">
+      <div class="card mat-elevation-z8 player-card" *ngFor="let signed of playersWithOffer">
+        <div class="card-body">
+          <mat-chip-list style="float: right;">
+            <mat-chip color="primary" selected>{{signed.status}}</mat-chip>
+          </mat-chip-list>
+          <h2 class="card-title">{{signed.name}}</h2>
+          <mat-divider></mat-divider>
+          <button mat-button color="basic">
+            Contrat offert de {{getContractFor(signed.uniqueID)}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ufa-container" *ngIf="ufas.length != 0">
+    <h3>Joueurs toujours en attente:</h3>
     <app-player-detail *ngFor="let ufa of ufas" [player]=ufa></app-player-detail>
   </div>
 

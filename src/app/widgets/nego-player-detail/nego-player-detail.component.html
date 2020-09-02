@@ -1,0 +1,46 @@
+<div class="container player-card-container mat-elevation-z8">
+  <div class="row">
+    <div class="col player-img-container">
+      <mat-chip-list style="position: absolute;top: 3px; left: 17px;">
+        <mat-chip color="{{getChipColor()}}" selected>{{player.status}}</mat-chip>
+      </mat-chip-list>
+      <img class="player-img" src={{getPlayerFaceImage()}} alt="Card image cap">
+    </div>
+
+    <!-- [style.backgroundImage]="getHeaderBackgroundImageUrl()" -->
+    <div class="col">
+
+      <div class="player-name">{{player.name}}</div>
+      <p class="card-text">
+        <img class="team-logo" src={{getHeaderBackgroundImageUrl()}} alt="Logo team">
+        <mat-list-item role="listitem">Position: {{player.position}}</mat-list-item>
+        <mat-list-item role="listitem">Équipe: {{player.team.teamCity}}</mat-list-item>
+        <mat-list-item role="listitem">Age: {{player.age}}</mat-list-item>
+        <mat-list-item role="listitem">Overall: {{player.OVK}}</mat-list-item>
+        <mat-list-item role="listitem">Bracket: {{player.expSalary}}</mat-list-item>
+      </p>
+    </div>
+    <div class="col">
+      <app-offer-sender #offerSender [player]="player"></app-offer-sender>
+      <p *ngIf="player.status == 'RFA';" style="text-align: center;">
+          Compensation: {{getCompensation()}}
+      </p>
+      <div class="button-row">
+        <div class="button-container">
+          <button mat-fab color="{{getChipColor()}}" #tooltip="matTooltip" matTooltip="Offrir ce salaire"
+            [matTooltipPosition]="'right'" [disabled]="isButtonDisabled()" matTooltipHideDelay="1000"
+            (click)="submitOffer()">
+            <mat-icon>history_edu</mat-icon>
+          </button>
+        </div>
+        <div class="button-container">
+          <button mat-fab color="{{getChipColor()}}" #tooltip="matTooltip" matTooltip="Interrompre les négociations"
+            [matTooltipPosition]="'right'" [disabled]="isButtonDisabled()" matTooltipHideDelay="1000"
+            (click)="onRemovePlayer()">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
