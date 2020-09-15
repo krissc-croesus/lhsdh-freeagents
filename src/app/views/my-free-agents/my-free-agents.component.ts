@@ -4,6 +4,7 @@ import { Player } from 'src/app/models/player';
 import { Auth, Hub } from 'aws-amplify';
 import { OffersService } from 'src/app/services/offers.service';
 import { Offer } from 'src/app/models/offer';
+import { AlertServiceService } from 'src/app/services/alert-service.service';
 
 const formatter = new Intl.NumberFormat('fr-CA', {
   style: 'currency',
@@ -18,6 +19,9 @@ const formatter = new Intl.NumberFormat('fr-CA', {
 })
 
 export class MyFreeAgentsComponent implements OnInit {
+
+  isDeleteButtonEnabled: boolean = true;
+
   // players
   ufas: Player[] = [];
   rfas: Player[] = [];
@@ -28,7 +32,7 @@ export class MyFreeAgentsComponent implements OnInit {
   playersWithOffer: Player[] = [];
   myOffers: Offer[] = [];
 
-  constructor(private playerService: PlayersService, private offerService: OffersService) {}
+  constructor(private playerService: PlayersService, private offerService: OffersService, private alertService: AlertServiceService) {}
 
   ngOnInit(): void {
 
@@ -86,7 +90,7 @@ export class MyFreeAgentsComponent implements OnInit {
         }
       }
     }, (error) => {
-        window.alert(error);
+      this.alertService.showErrorMsg("Nous n'avons pas réussi a charger les agents libres. Contacter Kriss");
     });
   }
 
@@ -99,6 +103,17 @@ export class MyFreeAgentsComponent implements OnInit {
     });
 
     return amount;
+  }
+
+  deleteOffer(playerId : number){
+    this.offerService.removeOffer(playerId).subscribe(
+      (data) => {
+        this.alertService.showConfirmMsg("L'offre a été effacé correctement");
+      },
+      (error) => {
+        this.alertService.showErrorMsg("Une erreur s'est produite.");
+      }
+    );
   }
 
 }

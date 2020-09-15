@@ -11,6 +11,7 @@ import { PlayersService } from '../services/players.service';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Auth } from 'aws-amplify';
+import { AlertServiceService } from '../services/alert-service.service';
 
 @Component({
   selector: 'app-all-free-agents',
@@ -42,7 +43,7 @@ export class AllFreeAgentsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   connectedUserTeam: number = 0;
 
-  constructor(private playerService: PlayersService) {
+  constructor(private playerService: PlayersService, private alertService: AlertServiceService) {
     Auth.currentUserInfo()
     .then((info) => {
       const team = info.attributes['custom:team'];
@@ -73,7 +74,7 @@ export class AllFreeAgentsComponent implements OnInit, AfterViewInit {
         };
       },
       (error) => {
-        window.alert(error);
+        this.alertService.showErrorMsg("Nous n'avons pas réussi a charger les agents libres. Contacter Kriss");
       }
     );
   }
