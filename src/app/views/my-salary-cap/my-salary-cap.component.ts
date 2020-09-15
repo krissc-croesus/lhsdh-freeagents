@@ -6,6 +6,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import { PlayerMapperService } from 'src/app/services/player-mapper.service';
 import { Team } from 'src/app/models/team';
 import { MatSelectChange } from '@angular/material/select';
+import { OffersService } from 'src/app/services/offers.service';
+import { Offer } from 'src/app/models/offer';
 
 @Component({
   selector: 'app-my-salary-cap',
@@ -38,9 +40,14 @@ export class MySalaryCapComponent implements OnInit {
   currentTeamName: string = '';
   currentTeamLogoURL: string = '';
 
+  //offers
+  playersWithOfferIds: number[] = [];
+  myOffers: Offer[] = [];
+
   constructor(
     private playerService: PlayersService,
-    private playerMapperService: PlayerMapperService
+    private playerMapperService: PlayerMapperService,
+    private offerService: OffersService
   ) {}
 
   ngOnInit(): void {
@@ -63,6 +70,7 @@ export class MySalaryCapComponent implements OnInit {
   initTables(team: number) {
     this.setTeam(team);
     this.splitPlayers(team);
+    this.fetchPlayersWithOffer(team);
   }
 
   fillTeamList() {
@@ -150,9 +158,37 @@ export class MySalaryCapComponent implements OnInit {
     return sortedArray;
   }
 
+  fetchPlayersWithOffer(team: number){
+    this.offerService.getOffersByTeam(team).subscribe(
+      (offers) => {
+        this.myOffers = offers;
+
+        this.myOffers.forEach(offer => {
+          if(offer.isOwner){
+            this.playersWithOfferIds.push(offer.playerId);
+          }
+        });
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
   displayExpectedSalary(player: Player) {
     if (player.status === 'UFA') {
+
+      if (this.playersWithOfferIds.indexOf(player.uniqueID) !== -1)
+      {
+        for (let index = 0; index < this.myOffers.length; index++) {
+          const offer = this.myOffers[index];
+          if(offer.playerId == player.uniqueID){
+            return offer.amount;
+          }
+        }
+      }
       return player.expectedSalary.max;
+
     } else if (player.status === 'RFA') {
       return player.expectedSalary.min;
     } else if (player.status === '35+') {
