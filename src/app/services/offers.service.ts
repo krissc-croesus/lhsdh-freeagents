@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
 })
 export class OffersService {
   OFFERS_RESSOURCE_URL = 'https://lhsdb-fa-api.piriwin.com/offers';
+  //OFFERS_RESSOURCE_URL = 'https://localhost:44351/offers';
 
   constructor(private restClient: HttpClient) {}
 
@@ -30,7 +31,8 @@ export class OffersService {
           info.username,
           isOwner,
           amount,
-          player.status
+          player.status,
+          player.name
         );
 
         this.restClient
@@ -70,5 +72,9 @@ export class OffersService {
           return playersArray;
         })
       );
+  }
+
+  removeOffer(playerId: number): Observable<Object>{
+    return this.restClient.delete(this.OFFERS_RESSOURCE_URL + "/" + playerId);
   }
 }

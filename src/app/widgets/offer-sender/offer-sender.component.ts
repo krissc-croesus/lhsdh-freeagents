@@ -24,13 +24,9 @@ export class OfferSenderComponent implements OnInit {
       this.sliderMax = this.player.expectedSalary.max;
       this.sliderMin = this.player.expectedSalary.min;
 
-      if (this.player.status === 'UFA') {
-        this.offerValue = this.player.expectedSalary.max;
-      }
-      else{
-        var diff = (this.player.expectedSalary.max - this.player.expectedSalary.min)/2;
-        this.offerValue = this.player.expectedSalary.min + diff;
-      }
+      var diff =
+        (this.player.expectedSalary.max - this.player.expectedSalary.min) / 2;
+      this.offerValue = this.player.expectedSalary.min + diff;
     }
 
     //[Validators.required, Validators.max(this.sliderMax), Validators.min(this.sliderMin)]

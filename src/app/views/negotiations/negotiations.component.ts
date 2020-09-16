@@ -4,6 +4,7 @@ import { Offer } from 'src/app/models/offer';
 import { PlayersService } from 'src/app/services/players.service';
 import { OffersService } from 'src/app/services/offers.service';
 import { Auth } from 'aws-amplify';
+import { AlertServiceService } from 'src/app/services/alert-service.service';
 
 const formatter = new Intl.NumberFormat('fr-CA', {
   style: 'currency',
@@ -22,8 +23,9 @@ export class NegotiationsComponent implements OnInit {
   playersWithOffer: Player[] = [];
   playersWithOfferIds: number[] = [];
   offersMade: Offer[] = [];
+  isDeleteButtonEnabled: boolean = true;
 
-  constructor(private playerService: PlayersService, private offerService: OffersService) {}
+  constructor(private playerService: PlayersService, private offerService: OffersService, private alertService: AlertServiceService) {}
 
   ngOnInit(): void {
     Auth.currentUserInfo()
@@ -79,7 +81,7 @@ export class NegotiationsComponent implements OnInit {
         }
       },
       (error) => {
-        window.alert(error);
+        this.alertService.showErrorMsg("Nous n'avons pas réussi a charger les agents libres. Contacter Kriss");
       }
     );
   }
@@ -109,6 +111,17 @@ export class NegotiationsComponent implements OnInit {
         return 'warn';
       }
     }
+  }
+
+  deleteOffer(playerId : number){
+    this.offerService.removeOffer(playerId).subscribe(
+      (data) => {
+        this.alertService.showConfirmMsg("L'offre a été effacé correctement");
+      },
+      (error) => {
+        this.alertService.showErrorMsg("Une erreur s'est produite.");
+      }
+    );
   }
 
 }

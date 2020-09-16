@@ -15,20 +15,18 @@ export class SalaryScaleService {
   getPlayerExpectedSalary(player: Player): ExpectedSalary {
     let ret: ExpectedSalary = { min: 0, max: 8000000 };
 
-    if (player.status === '35+') {
-      return { min: 0, max: 10000000 };
-    }
-
     switch (player.position) {
       case 'Attaquant':
       case 'Défenseur':
-        return this.getForwardExpectedSalary(player);
-
+        ret = this.getForwardExpectedSalary(player);
       case 'Gardien':
-        return this.getGoalieExpectedSalary(player);
-      default:
-        return ret;
+        ret = this.getGoalieExpectedSalary(player);
     }
+
+    if (player.status === '35+') {
+      return { min: ret.min, max: 10000000 };
+    }
+    return ret;
   }
   private getGoalieExpectedSalary(player: Player): ExpectedSalary {
     var ovk = player.OVK;

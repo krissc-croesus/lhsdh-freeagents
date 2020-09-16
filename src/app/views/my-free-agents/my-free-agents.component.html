@@ -90,9 +90,14 @@
           </mat-chip-list>
           <h2 class="card-title">{{signed.name}}</h2>
           <mat-divider></mat-divider>
-          <button mat-button color="basic">
-            Contrat offert de {{getContractFor(signed.uniqueID)}}
-          </button>
+          <div class="signedPlayer-btns">
+            <button mat-button color="basic">
+              Contrat offert de {{getContractFor(signed.uniqueID)}}
+            </button>
+            <button mat-mini-fab color="warn" [disabled]="!isDeleteButtonEnabled" class="action-btn" (click)="deleteOffer(signed.uniqueID)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </div>
       </div>
     </div>

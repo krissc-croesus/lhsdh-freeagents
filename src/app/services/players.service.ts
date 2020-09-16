@@ -10,6 +10,7 @@ import { PlayerMapperService } from './player-mapper.service';
   providedIn: 'root'
 })
 export class PlayersService {
+  //PLAYER_RESSOURCE_URL = 'https://localhost:44351/players';
   PLAYER_RESSOURCE_URL = 'https://lhsdb-fa-api.piriwin.com/players';
 
   constructor(
