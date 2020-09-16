@@ -19,8 +19,10 @@ export class SalaryScaleService {
       case 'Attaquant':
       case 'Défenseur':
         ret = this.getForwardExpectedSalary(player);
+        break;
       case 'Gardien':
         ret = this.getGoalieExpectedSalary(player);
+        break;
     }
 
     if (player.status === '35+') {
