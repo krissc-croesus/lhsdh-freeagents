@@ -44,6 +44,7 @@ import localeFr from "@angular/common/locales/fr";
 import { TablePlayerDetailComponent } from './widgets/table-player-detail/table-player-detail.component';
 import { OfferSenderComponent } from './widgets/offer-sender/offer-sender.component';
 import { NegoPlayerDetailComponent } from './widgets/nego-player-detail/nego-player-detail.component';
+import { AdmTeamsSummaryComponent } from './views/adm-teams-summary/adm-teams-summary.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { NegoPlayerDetailComponent } from './widgets/nego-player-detail/nego-pla
     PlayerDetailComponent,
     TablePlayerDetailComponent,
     OfferSenderComponent,
-    NegoPlayerDetailComponent
+    NegoPlayerDetailComponent,
+    AdmTeamsSummaryComponent
   ],
   imports: [
     BrowserModule,

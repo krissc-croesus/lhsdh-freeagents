@@ -21,6 +21,7 @@
       <a mat-list-item [routerLink]="'/negociations'" [routerLinkActive]="['active']">
         <span matBadge="{{getNegociationsCount()}}" matBadgeOverlap="false" matBadgeSize="medium">Négociations </span>
       </a>
+      <a *ngIf="isAdmin" mat-list-item [routerLink]="'/adm-teams-summary'" [routerLinkActive]="['active']"> Sommaire par équipe </a>
       <amplify-sign-out button-text="Déconnecter"></amplify-sign-out>
     </mat-nav-list>
 

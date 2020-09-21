@@ -17,6 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
   connectedUsername: string;
   mobileQuery: MediaQueryList;
   teamLogoURL: string = "";
+  isAdmin: boolean = false;
 
   private _mobileQueryListener: () => void;
   @ViewChild('sidenav') sideNav;
@@ -58,10 +59,11 @@ export class AppComponent implements OnInit, OnDestroy {
     Auth.currentUserInfo()
     .then((info) => {
       const team = info.attributes['custom:team'];
-      //this.connectedUsername = info.username;
+      const isAdm = info.attributes['custom:isAdmin'];
 
       this.setTeamLogoURL(team);
       this.isSignedIn = true;
+      this.isAdmin = (isAdm == 1);
     })
     .catch(() => console.log('Not signed in'));
   }
