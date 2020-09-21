@@ -1,0 +1,20 @@
+<div class="container">
+  <h1 class="display-1 page-title"> Décompte des offres par équipe</h1>
+
+  <div class="row">
+    <div class="col"><b>Équipe</b></div>
+    <div class="col"><b>Offres à ses joueurs</b></div>
+    <div class="col"><b>Offres aux autres</b></div>
+  </div>
+
+  <div class="row" *ngFor="let teamSummary of teamSummaries">
+    <div class="col">{{teamSummary.team.teamName}}</div>
+    <div class="col">{{teamSummary.owned}}</div>
+    <div class="col">{{teamSummary.others}}</div>
+  </div>
+  <mat-divider></mat-divider>
+  <h3>On attend les offres de:</h3>
+  <ul>
+    <li *ngFor="let item of waitingFor"> {{item}} </li>
+   </ul>
+</div>
