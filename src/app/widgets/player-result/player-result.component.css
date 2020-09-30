@@ -1,0 +1,55 @@
+.player-card-container {
+  margin: 2% 0 2% 0;
+  padding: 2%;
+}
+
+.player-img-container {
+  max-width: 168px;
+  height: auto;
+  margin-right: 2%;
+}
+
+.player-img {
+  width: 168px;
+  max-width: 168px;
+  height: auto;
+  border-radius: 5%;
+}
+
+.player-name {
+  font-size: 2vw;
+  margin-bottom: 2%;
+  margin-top: 1%;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 70px;
+}
+.card-text {
+  vertical-align: middle;
+  margin-top: 5%;
+}
+
+.team-logo {
+  position: absolute;
+  /*right: 20%;
+  bottom: 3%;*/
+  left: 0;
+  top: 0;
+  opacity: 0.1;
+  height: auto;
+  width: 260px;
+}
+
+.attention{
+  border-left: 10px solid #f44336 !important;
+  border-radius: 5px;
+}

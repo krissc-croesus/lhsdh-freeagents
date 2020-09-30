@@ -20,6 +20,7 @@ export class MySalaryCapComponent implements OnInit {
     'position',
     'OVK',
     'statut',
+    'contract',
     'salary',
     'expectedSalary',
   ];
@@ -176,8 +177,13 @@ export class MySalaryCapComponent implements OnInit {
   }
 
   displayExpectedSalary(player: Player) {
-    if (player.status === 'UFA') {
 
+    // if player has already a salary (happens in 2nd round)
+    if(player.salary > 0){
+      return player.salary;
+    }
+
+    if (player.status === 'UFA') {
       if (this.playersWithOfferIds.indexOf(player.uniqueID) !== -1)
       {
         for (let index = 0; index < this.myOffers.length; index++) {

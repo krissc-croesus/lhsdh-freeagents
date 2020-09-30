@@ -74,6 +74,24 @@ export class OffersService {
       );
   }
 
+  getOffersForPlayer(playerId: number): Observable<Offer[]> {
+    return this.restClient
+      .get<Offer>(this.OFFERS_RESSOURCE_URL + '/players/' + playerId)
+      .pipe(
+        map((responseData) => {
+          const offersArray: Offer[] = [];
+
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              const offerResponse = { ...responseData[key] };
+              offersArray.push(offerResponse);
+            }
+          }
+          return offersArray;
+        })
+      );
+  }
+
   removeOffer(playerId: number): Observable<Object>{
     return this.restClient.delete(this.OFFERS_RESSOURCE_URL + "/" + playerId);
   }
