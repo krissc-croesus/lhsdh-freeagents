@@ -1,0 +1,42 @@
+  <div class="container player-card-container mat-elevation-z8" [ngClass]="{'attention': !ownerWins}">
+    <!-- <div class="row" *ngIf="!displayLoading; else elseBlock"> -->
+    <div class="row">
+      <div class="col player-img-container">
+        <mat-chip-list style="position: absolute;top: 3px; left: 17px;">
+          <mat-chip color="{{getChipColor()}}" selected>{{player.status}}</mat-chip>
+        </mat-chip-list>
+        <img class="player-img" src={{getPlayerFaceImage()}} alt="Card image cap">
+      </div>
+
+      <div class="col">
+        <div class="player-name">{{player.name}}</div>
+        <p class="card-text">
+          <img class="team-logo" src={{getHeaderBackgroundImageUrl()}} alt="Logo team">
+          <mat-list-item role="listitem">Équipe: {{player.team.teamCity}}</mat-list-item>
+          <mat-list-item role="listitem">Overall: {{player.OVK}}</mat-list-item>
+          <mat-list-item role="listitem">Bracket: {{player.expSalary}}</mat-list-item>
+          <mat-list-item role="listitem">Offre reçue: {{ownerOffer | currency:'CAD':'symbol-narrow':'1.0-2':'fr-CA'}}</mat-list-item>
+        </p>
+      </div>
+      <div class="col">
+        <h2>Moy. Offres: {{average | currency:'CAD':'symbol-narrow':'1.0-2':'fr-CA'}}</h2>
+        <h1>Gagnant(s): {{getWinners()}}</h1>
+        <h4><U>Historique:</U></h4>
+        <mat-list-item *ngFor="let offre of offers" role="listitem">{{getOfferedBy(offre)}} a offert {{offre.amount | currency:'CAD':'symbol-narrow':'1.0-2':'fr-CA'}}</mat-list-item>
+      </div>
+      <div style="margin-right: 10px;">
+        <button *ngIf="ownerWins; else elseBlock2" mat-fab color="accent">
+          <mat-icon>assignment_turned_in</mat-icon>
+        </button>
+        <ng-template #elseBlock2>
+          <button *ngIf="!displayLoading; else elseBlock2" mat-fab color="warn">
+            <mat-icon>feedback</mat-icon>
+          </button>
+        </ng-template>
+      </div>
+    </div>
+    <!--<ng-template #elseBlock>
+      wait...
+    </ng-template> -->
+  </div>
+

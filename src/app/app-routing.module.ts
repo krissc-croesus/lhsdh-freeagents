@@ -7,6 +7,7 @@ import { MyFreeAgentsComponent } from './views/my-free-agents/my-free-agents.com
 import { MySalaryCapComponent } from './views/my-salary-cap/my-salary-cap.component';
 import { NegotiationsComponent } from './views/negotiations/negotiations.component';
 import { AdmTeamsSummaryComponent } from './views/adm-teams-summary/adm-teams-summary.component';
+import { ResultsComponent } from './views/results/results.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'my-salary-cap', component: MySalaryCapComponent, canActivate: [AuthGuard]},
   { path: 'negociations', component: NegotiationsComponent, canActivate: [AuthGuard]},
   { path: 'adm-teams-summary', component: AdmTeamsSummaryComponent, canActivate: [AuthGuard]},
+  { path: 'adm-results', component: ResultsComponent, canActivate: [AuthGuard]},
   { path: '**', redirectTo: '/all-free-agents' }
 ];
 

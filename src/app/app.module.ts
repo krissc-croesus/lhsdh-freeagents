@@ -23,7 +23,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 import { LoginComponent } from './views/login/login.component';
@@ -45,6 +46,8 @@ import { TablePlayerDetailComponent } from './widgets/table-player-detail/table-
 import { OfferSenderComponent } from './widgets/offer-sender/offer-sender.component';
 import { NegoPlayerDetailComponent } from './widgets/nego-player-detail/nego-player-detail.component';
 import { AdmTeamsSummaryComponent } from './views/adm-teams-summary/adm-teams-summary.component';
+import { PlayerResultComponent } from './widgets/player-result/player-result.component';
+import { ResultsComponent } from './views/results/results.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +61,9 @@ import { AdmTeamsSummaryComponent } from './views/adm-teams-summary/adm-teams-su
     TablePlayerDetailComponent,
     OfferSenderComponent,
     NegoPlayerDetailComponent,
-    AdmTeamsSummaryComponent
+    AdmTeamsSummaryComponent,
+    PlayerResultComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,
@@ -85,6 +90,7 @@ import { AdmTeamsSummaryComponent } from './views/adm-teams-summary/adm-teams-su
     MatSliderModule,
     MatSnackBarModule,
     MatSelectModule,
+    MatProgressSpinnerModule,
     // Amplify
     AmplifyUIAngularModule
   ],
