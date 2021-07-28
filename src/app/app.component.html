@@ -15,17 +15,18 @@
     fixedTopGap="56">
 
     <mat-nav-list>
-      <!-- <a mat-list-item [routerLink]="'/my-free-agents'" [routerLinkActive]="['active']"> Mes Agents Libres </a> -->
+      <a mat-list-item [routerLink]="'/my-free-agents'" [routerLinkActive]="['active']"> Mes Agents Libres </a>
       <a mat-list-item [routerLink]="'/my-salary-cap'" [routerLinkActive]="['active']"> Masse Salariale</a>
       <a mat-list-item [routerLink]="'/app-all-free-agents'" [routerLinkActive]="['active']"> Joueurs Disponibles </a>
-      <!-- <a mat-list-item [routerLink]="'/negociations'" [routerLinkActive]="['active']">
+      <a mat-list-item [routerLink]="'/negociations'" [routerLinkActive]="['active']">
         <span matBadge="{{getNegociationsCount()}}" matBadgeOverlap="false" matBadgeSize="medium">Négociations </span>
-      </a>-->
-      <a *ngIf="isAdmin" mat-list-item [routerLink]="'/adm-teams-summary'" [routerLinkActive]="['active']"> Sommaire par équipe </a>
-      <a *ngIf="isAdmin" mat-list-item [routerLink]="'/adm-results'" [routerLinkActive]="['active']"> Résultats préliminaires </a>
+      </a>
+      <a *ngIf="isAdmin" mat-list-item [routerLink]="'/adm-teams-summary'" [routerLinkActive]="['active']"> Sommaire par
+        équipe </a>
+      <a *ngIf="isAdmin" mat-list-item [routerLink]="'/adm-results'" [routerLinkActive]="['active']"> Résultats
+        préliminaires </a>
       <amplify-sign-out button-text="Déconnecter"></amplify-sign-out>
     </mat-nav-list>
-
   </mat-sidenav>
 
   <mat-sidenav-content>

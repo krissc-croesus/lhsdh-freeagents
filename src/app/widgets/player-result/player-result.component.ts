@@ -127,7 +127,7 @@ export class PlayerResultComponent implements OnInit {
 
   getPlayerFaceImage() {
     const nhlAvatarsURL =
-      'https://nhl.bamcontent.com/images/headshots/current/168x168/';
+      'https://cms.nhl.bamgrid.com/images/headshots/current/168x168/';
     var playerID = this.player.URLLink.substring(
       this.player.URLLink.lastIndexOf('/') + 1
     );
