@@ -40,7 +40,7 @@ export class TablePlayerDetailComponent implements OnInit {
   }
 
   onStartNegociations() {
-    const storageKey = 'WANTED';
+    const storageKey = 'LHSDB-FA-2021';
     var currentNegociations = [];
     var savedNegociations = JSON.parse(localStorage.getItem(storageKey));
 
