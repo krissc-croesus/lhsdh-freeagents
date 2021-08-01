@@ -58,9 +58,9 @@ export class MySalaryCapComponent implements OnInit {
         const isAdmin = info.attributes['custom:isAdmin'];
         this.isAdmin = (isAdmin == 1);
 
-        if (this.isAdmin) {
+        //if (this.isAdmin) {
           this.fillTeamList();
-        }
+        //}
 
         const team = info.attributes['custom:team'];
         this.initTables(team);
@@ -75,7 +75,7 @@ export class MySalaryCapComponent implements OnInit {
   }
 
   fillTeamList() {
-    for (let index = 1; index <= 31; index++) {
+    for (let index = 1; index <= 32; index++) {
       const team: Team = this.playerMapperService.mapTeam(index);
       this.allTeams.push(team);
     }

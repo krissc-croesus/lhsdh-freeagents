@@ -2,8 +2,9 @@ import { Team } from './team';
 import { ExpectedSalary } from '../services/salary-scale.service';
 
 const formatter = new Intl.NumberFormat('fr-CA', {
-  style: 'currency',
-  currency: 'CAD',
+  style: 'decimal',
+  currency: 'USD',
+  currencyDisplay: 'symbol',
   minimumFractionDigits: 0
 })
 
@@ -39,7 +40,7 @@ export class Player {
     {
       const min = formatter.format(this.expectedSalary.min);
       const max = formatter.format(this.expectedSalary.max);
-      return min + " à " + max;
+      return min + "$ à " + max + "$";
     }
     return "";
   }

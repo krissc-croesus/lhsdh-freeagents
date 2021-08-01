@@ -17,7 +17,8 @@ export class TablePlayerDetailComponent implements OnInit {
 
   getPlayerFaceImage() {
     const nhlAvatarsURL =
-      'https://nhl.bamcontent.com/images/headshots/current/168x168/';
+      'https://cms.nhl.bamgrid.com/images/headshots/current/168x168/';
+
     var playerID = this.player.URLLink.substring(
       this.player.URLLink.lastIndexOf('/') + 1
     );
@@ -39,7 +40,7 @@ export class TablePlayerDetailComponent implements OnInit {
   }
 
   onStartNegociations() {
-    const storageKey = 'WANTED';
+    const storageKey = 'LHSDB-FA-2021';
     var currentNegociations = [];
     var savedNegociations = JSON.parse(localStorage.getItem(storageKey));
 

@@ -17,7 +17,7 @@ const formatter = new Intl.NumberFormat('fr-CA', {
   styleUrls: ['./negotiations.component.css'],
 })
 export class NegotiationsComponent implements OnInit {
-  storageKey: string = 'WANTED';
+  storageKey: string = 'LHSDB-FA-2021';
   allPlayers: Player[] = [];
   wantedPlayers: Player[] = [];
   playersWithOffer: Player[] = [];

@@ -107,6 +107,10 @@ export class PlayerMapperService {
         return new Team(teamId, 'Minnesota', 'Wild', 30);
       case 31:
         return new Team(teamId, 'Vegas', 'Golden Knights', 54);
+      case 32:
+        return new Team(teamId, 'Seattle', 'Kraken', 55);
+      case 33:
+        return new Team(teamId, 'Agent Libres','Libre', 60);
       default:
         return new Team(teamId, 'Unknown', 'Team', 0);
     }
