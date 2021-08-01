@@ -77,7 +77,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   getNegociationsCount()
   {
-    const storageKey =  "WANTED";
+    const storageKey =  "LHSDB-FA-2021";
     let currentNegociations = [];
     let savedNegociations = JSON.parse(localStorage.getItem(storageKey));
 
