@@ -27,6 +27,7 @@ export class MySalaryCapComponent implements OnInit {
   allTeams: Team[] = [];
   selectedTeam: Team;
   isAdmin: boolean = true;
+  loggedTeamNumber: number;
 
   forwards: Player[] = [];
   defensemen: Player[] = [];
@@ -56,13 +57,14 @@ export class MySalaryCapComponent implements OnInit {
       .then((info) => {
         // For admin
         const isAdmin = info.attributes['custom:isAdmin'];
-        this.isAdmin = (isAdmin == 1);
+        this.isAdmin = isAdmin == 1;
 
         //if (this.isAdmin) {
-          this.fillTeamList();
+        this.fillTeamList();
         //}
 
         const team = info.attributes['custom:team'];
+        this.loggedTeamNumber = team;
         this.initTables(team);
       })
       .catch(() => console.log('Not signed in'));
@@ -159,42 +161,41 @@ export class MySalaryCapComponent implements OnInit {
     return sortedArray;
   }
 
-  fetchPlayersWithOffer(team: number){
-    this.offerService.getOffersByTeam(team).subscribe(
-      (offers) => {
-        this.myOffers = offers;
+  fetchPlayersWithOffer(team: number) {
+    if (this.loggedTeamNumber == team) {
+      this.offerService.getOffersByTeam(team).subscribe(
+        (offers) => {
+          this.myOffers = offers;
 
-        this.myOffers.forEach(offer => {
-          if(offer.isOwner){
-            this.playersWithOfferIds.push(offer.playerId);
-          }
-        });
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+          this.myOffers.forEach((offer) => {
+            if (offer.isOwner) {
+              this.playersWithOfferIds.push(offer.playerId);
+            }
+          });
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
   }
 
   displayExpectedSalary(player: Player) {
-
     // if player has already a salary (happens in 2nd round)
-    if(player.salary > 0){
+    if (player.salary > 0) {
       return player.salary;
     }
 
     if (player.status === 'UFA') {
-      if (this.playersWithOfferIds.indexOf(player.uniqueID) !== -1)
-      {
+      if (this.playersWithOfferIds.indexOf(player.uniqueID) !== -1) {
         for (let index = 0; index < this.myOffers.length; index++) {
           const offer = this.myOffers[index];
-          if(offer.playerId == player.uniqueID){
+          if (offer.playerId == player.uniqueID) {
             return offer.amount;
           }
         }
       }
       return player.expectedSalary.max;
-
     } else if (player.status === 'RFA') {
       return player.expectedSalary.min;
     } else if (player.status === '35+') {
@@ -250,14 +251,13 @@ export class MySalaryCapComponent implements OnInit {
   getCapForTop(players: Player[], top: number) {
     let cap = 0;
 
-    if(players.length < top)
-    {
+    if (players.length < top) {
       return cap;
     }
 
     for (let index = 0; index < top; index++) {
       const player = players[index];
-      if(player.salary){
+      if (player.salary) {
         cap += player.salary;
       }
     }
@@ -276,8 +276,7 @@ export class MySalaryCapComponent implements OnInit {
 
   getExpectedCapFor(players: Player[], top: number) {
     let cap = 0;
-    if(players.length < top)
-    {
+    if (players.length < top) {
       return cap;
     }
 

@@ -18,15 +18,16 @@ export class PlayerMapperService {
     player.OVK = playerResponse.ovk;
     player.URLLink = playerResponse.urlLink;
     player.age = playerResponse.age;
-    player.contract = playerResponse.contract;
     player.isFA = playerResponse.isFA;
     player.position = playerResponse.position;
     player.salary = playerResponse.salary;
     player.team = this.mapTeam(playerResponse.team);
     player.status = this.mapStatus(playerResponse.isFA, playerResponse.age);
+    player.contract = this.mapContract(playerResponse.contract, playerResponse.isFA, playerResponse.age);
     player.expectedSalary = this.salaryScaleService.getPlayerExpectedSalary(player);
     return player;
   }
+
 
   mapStatus(IsFA: boolean, Age: number): string {
     if (IsFA) {
@@ -114,5 +115,12 @@ export class PlayerMapperService {
       default:
         return new Team(teamId, 'Unknown', 'Team', 0);
     }
+  }
+
+  mapContract(Contract: number, IsFA: boolean, Age: number): number {
+    if (IsFA && Age > 34) {
+      return 0;
+    }
+    return Contract;
   }
 }
