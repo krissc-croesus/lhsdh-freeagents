@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AllFreeAgentsComponent } from './all-free-agents.component';
 
@@ -6,7 +6,7 @@ describe('AllFreeAgentsComponent', () => {
   let component: AllFreeAgentsComponent;
   let fixture: ComponentFixture<AllFreeAgentsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AllFreeAgentsComponent ]
     })
