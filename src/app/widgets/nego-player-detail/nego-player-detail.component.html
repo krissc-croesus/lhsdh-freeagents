@@ -13,12 +13,14 @@
       <div class="player-name">{{player.name}}</div>
       <p class="card-text">
         <img class="team-logo" src={{getHeaderBackgroundImageUrl()}} alt="Logo team">
-        <mat-list-item role="listitem">Position: {{player.position}}</mat-list-item>
-        <mat-list-item role="listitem">Équipe: {{player.team.teamCity}}</mat-list-item>
-        <mat-list-item role="listitem">Age: {{player.age}}</mat-list-item>
-        <mat-list-item role="listitem">Overall: {{player.OVK}}</mat-list-item>
-        <mat-list-item role="listitem">Bracket: {{player.expSalary}}</mat-list-item>
-        <mat-list-item role="listitem">Durée du contrat: {{player.contract}}</mat-list-item>
+        <mat-list class="att-list">
+          <mat-list-item role="listitem">Position: {{player.position}}</mat-list-item>
+          <mat-list-item role="listitem">Équipe: {{player.team.teamCity}}</mat-list-item>
+          <mat-list-item role="listitem">Age: {{player.age}}</mat-list-item>
+          <mat-list-item role="listitem">Overall: {{player.OVK}}</mat-list-item>
+          <mat-list-item role="listitem">Bracket: {{player.expSalary}}</mat-list-item>
+          <mat-list-item role="listitem">Durée du contrat: {{player.contract}}</mat-list-item>
+        </mat-list>
       </p>
     </div>
     <div class="col">

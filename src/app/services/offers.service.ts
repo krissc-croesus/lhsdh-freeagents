@@ -91,7 +91,7 @@ export class OffersService {
       );
   }
 
-  removeOffer(playerId: number): Observable<Object> {
+  removeOffer(playerId: number): Observable<any> {
     return this.restClient.delete(this.OFFERS_RESSOURCE_URL + "/" + playerId);
   }
 }
