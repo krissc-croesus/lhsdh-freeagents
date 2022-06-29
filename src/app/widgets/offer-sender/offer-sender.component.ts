@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Player } from 'src/app/models/player';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-offer-sender',
@@ -15,7 +15,7 @@ export class OfferSenderComponent implements OnInit {
   sliderStep: number = 10000;
   offerValue: number = 0;
 
-  offerTextBox = new FormControl(this.offerValue);
+  offerTextBox = new UntypedFormControl(this.offerValue);
 
   constructor() {}
 
@@ -48,7 +48,7 @@ export class OfferSenderComponent implements OnInit {
     return value;
   }
 
-  getOfferTextBox() : FormControl{
+  getOfferTextBox() : UntypedFormControl{
     return this.offerTextBox;
   }
 

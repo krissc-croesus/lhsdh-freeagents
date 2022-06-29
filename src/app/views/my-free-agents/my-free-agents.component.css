@@ -19,3 +19,7 @@
 .signedPlayer-btns{
   margin-top: 10px;
 }
+
+.att-list .mat-list-item, .mat-list-base .mat-list-option {
+  height: 30px;
+}

@@ -53,3 +53,7 @@
   border-left: 10px solid #f44336 !important;
   border-radius: 5px;
 }
+
+.att-list .mat-list-item, .mat-list-base .mat-list-option {
+  height: auto;
+}
