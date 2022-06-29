@@ -4,7 +4,6 @@ import { ExpectedSalary } from '../services/salary-scale.service';
 const formatter = new Intl.NumberFormat('fr-CA', {
   style: 'decimal',
   currency: 'USD',
-  currencyDisplay: 'symbol',
   minimumFractionDigits: 0
 })
 

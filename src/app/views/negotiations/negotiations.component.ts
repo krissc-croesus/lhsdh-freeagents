@@ -10,20 +10,23 @@ const formatter = new Intl.NumberFormat('fr-CA', {
   style: 'currency',
   currency: 'CAD',
   minimumFractionDigits: 0
-})
+});
+
 @Component({
   selector: 'app-negotiations',
   templateUrl: './negotiations.component.html',
   styleUrls: ['./negotiations.component.css'],
 })
+
 export class NegotiationsComponent implements OnInit {
   storageKey: string = 'LHSDB-FA-2021';
   allPlayers: Player[] = [];
-  wantedPlayers: Player[] = [];
-  playersWithOffer: Player[] = [];
   playersWithOfferIds: number[] = [];
   offersMade: Offer[] = [];
   isDeleteButtonEnabled: boolean = true;
+  
+  wantedPlayers: Player[] = [];
+  playersWithOffer: Player[] = [];
 
   constructor(private playerService: PlayersService, private offerService: OffersService, private alertService: AlertServiceService) {}
 
@@ -115,10 +118,12 @@ export class NegotiationsComponent implements OnInit {
 
   deleteOffer(playerId : number){
     this.offerService.removeOffer(playerId).subscribe(
-      (data) => {
+      () => {
+        console.log("Deleted");
         this.alertService.showConfirmMsg("L'offre a été effacé correctement");
       },
-      (error) => {
+      error => {
+        console.log("Error inconnue");
         this.alertService.showErrorMsg("Une erreur s'est produite.");
       }
     );
