@@ -16,7 +16,7 @@ export class NegoPlayerDetailComponent implements OnInit {
   @Input() nbOffers: number;
   @ViewChild('offerSender') offerSenderWidget: OfferSenderComponent;
   isSendBtnDisabled: boolean = false;
-  storageKey: string = 'LHSDB-FA-2021';
+  storageKey: string = 'LHSDB-FA-2022';
 
   constructor(
     private offerService: OffersService,
