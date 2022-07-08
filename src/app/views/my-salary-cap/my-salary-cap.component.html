@@ -2,7 +2,7 @@
   <!-- <mat-form-field appearance="fill" *ngIf="isAdmin" style="margin-top: 2%;"> visible only for admins-->
   <mat-form-field appearance="fill" style="margin-top: 2%;">
     <mat-label>Équipe</mat-label>
-    <mat-select [(value)]="selectedTeam" (selectionChange)="onTeamSelect($event)">
+    <mat-select (selectionChange)="onTeamSelect($event)">
       <mat-option [value]="team" *ngFor="let team of allTeams">{{ team.teamCity }}</mat-option>
     </mat-select>
   </mat-form-field>
