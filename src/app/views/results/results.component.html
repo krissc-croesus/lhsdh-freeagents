@@ -1,5 +1,22 @@
 <div class="container">
   <h1 class="display-1 page-title"> Résultats</h1>
-  <mat-divider></mat-divider>
-  <app-player-result *ngFor="let player of filteredUFAs" [player]="player" ></app-player-result>
+  <mat-divider>UFA</mat-divider>
+  <app-player-result *ngFor="let player of filteredUFAs" [player]="player"></app-player-result>
+  <mat-toolbar>
+    <div class="button-row">
+      <button mat-fab color="primary" #tooltip="matTooltip" matTooltip="Page Précédente" [matTooltipPosition]="'right'"
+        matTooltipHideDelay="1000" (click)="previousPage()">
+        <mat-icon>navigate_before</mat-icon>
+      </button>
+      <button mat-fab color="primary" #tooltip="matTooltip" matTooltip="Page Suivante" [matTooltipPosition]="'right'"
+        matTooltipHideDelay="1000" (click)="nextPage()">
+        <mat-icon>navigate_next</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+  <mat-divider>RFA</mat-divider> 
+  <br/>
+  <br/>
+  <br/>
+  <br/>
 </div>
