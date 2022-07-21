@@ -67,27 +67,34 @@ export class NegotiationsComponent implements OnInit {
         var savedNegociations = JSON.parse(
           localStorage.getItem(this.storageKey)
         );
-        if (savedNegociations != null) {
 
-          this.allPlayers.forEach((player) => {
-           savedNegociations.forEach((element)=> {
+        this.allPlayers.forEach(
+          (player) => {
 
-             if (player.uniqueID === element) {
-              if (this.playersWithOfferIds.indexOf(player.uniqueID) !== -1) {
-                this.playersWithOffer.push(player);
-              }else {
-                this.wantedPlayers.push(player);
+            if (this.playersWithOfferIds.indexOf(player.uniqueID) !== -1) {
+              this.playersWithOffer.push(player);
+            }
+            else {
+              if (savedNegociations != null) {
+                savedNegociations.forEach(
+                  (element) => {
+
+                    if (player.uniqueID === element) {
+                      this.wantedPlayers.push(player);
+                    }
+                  }
+                );
               }
-              }
-            });
-          });
-        }
+            }
+          }
+        )
       },
       (error) => {
         this.alertService.showErrorMsg("Nous n'avons pas réussi a charger les agents libres. Contacter Kriss");
       }
     );
   }
+  
 
   getContractFor(playerId: number){
     var amount = "0$";
