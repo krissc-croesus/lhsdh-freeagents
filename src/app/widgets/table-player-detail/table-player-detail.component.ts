@@ -19,6 +19,12 @@ export class TablePlayerDetailComponent implements OnInit {
     const nhlAvatarsURL =
       'https://cms.nhl.bamgrid.com/images/headshots/current/168x168/';
 
+    if(this.player.URLLink == null)
+    {
+      console.log(this.player.name);
+      return "";
+    }
+
     var playerID = this.player.URLLink.substring(
       this.player.URLLink.lastIndexOf('/') + 1
     );
@@ -40,7 +46,7 @@ export class TablePlayerDetailComponent implements OnInit {
   }
 
   onStartNegociations() {
-    const storageKey = 'LHSDB-FA-2022';
+    const storageKey = 'LHSDB-FA-2023';
     var currentNegociations = [];
     var savedNegociations = JSON.parse(localStorage.getItem(storageKey));
 
