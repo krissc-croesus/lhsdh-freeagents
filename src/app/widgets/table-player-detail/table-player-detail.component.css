@@ -37,3 +37,12 @@
 .att-list .mat-list-item, .mat-list-base .mat-list-option {
   height: auto;
 }
+
+.team-logo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0.1;
+  height: auto;
+  width: 260px;
+}

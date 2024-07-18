@@ -1,12 +1,11 @@
 <div class="container-fluid player-card-container">
   <div class="row">
-
     <div class="col-2 player-img-container">
       <img class="player-img" src={{getPlayerFaceImage()}} alt="Card image cap">
     </div>
-
-    <!-- [style.backgroundImage]="getHeaderBackgroundImageUrl()" -->
+    
     <div class="col-9">
+      <img class="team-logo" src={{getHeaderBackgroundImageUrl()}} alt="Logo team">
       <div class="player-name">{{player.name}}</div>
       <p class="card-text">
         <mat-list class="att-list">
