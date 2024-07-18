@@ -72,12 +72,12 @@ export class AppComponent implements OnInit, OnDestroy {
   {
     const team: Team = this.playerMapperService.mapTeam(+teamID);
     this.connectedUsername= team.teamCity + " " + team.teamName;
-    this.teamLogoURL = "https://www-league.nhlstatic.com/images/logos/teams-current-primary-dark/" + team.logoId + ".svg"
+    this.teamLogoURL = 'https://assets.nhle.com/logos/nhl/svg/'+ team.logoId + '_dark.svg';
   }
 
   getNegociationsCount()
   {
-    const storageKey =  "LHSDB-FA-2023";
+    const storageKey =  "LHSDB-FA-2024";
     let currentNegociations = [];
     let savedNegociations = JSON.parse(localStorage.getItem(storageKey));
 

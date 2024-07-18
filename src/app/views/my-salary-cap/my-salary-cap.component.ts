@@ -100,10 +100,7 @@ export class MySalaryCapComponent implements OnInit {
     const team: Team = this.playerMapperService.mapTeam(+teamID);
     this.selectedTeam = team;
     this.currentTeamName = team.teamCity + ' ' + team.teamName;
-    this.currentTeamLogoURL =
-      'https://www-league.nhlstatic.com/images/logos/teams-current-primary-dark/' +
-      team.logoId +
-      '.svg';
+    this.currentTeamLogoURL = 'https://assets.nhle.com/logos/nhl/svg/'+ team.logoId + '_dark.svg';
   }
 
   splitPlayers(team: number) {

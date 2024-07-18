@@ -47,73 +47,73 @@ export class PlayerMapperService {
   mapTeam(teamId: number): Team {
     switch (teamId) {
       case 1:
-        return new Team(teamId, 'Buffalo', 'Sabres', 7);
+        return new Team(teamId, 'Buffalo', 'Sabres', "BUF");
       case 2:
-        return new Team(teamId, 'Ottawa ', 'Senators', 9);
+        return new Team(teamId, 'Ottawa ', 'Senators', "OTT");
       case 3:
-        return new Team(teamId, 'Montreal', 'Canadiens', 8);
+        return new Team(teamId, 'Montreal', 'Canadiens', "MTL");
       case 4:
-        return new Team(teamId, 'Boston', 'Bruins', 6);
+        return new Team(teamId, 'Boston', 'Bruins', "BOS");
       case 5:
-        return new Team(teamId, 'Toronto', 'Maple Leafs', 10);
+        return new Team(teamId, 'Toronto', 'Maple Leafs', "TOR");
       case 6:
-        return new Team(teamId, 'Pittsburgh', 'Penguins', 5);
+        return new Team(teamId, 'Pittsburgh', 'Penguins', "PIT");
       case 7:
-        return new Team(teamId, 'Philadelphia', 'Flyers', 4);
+        return new Team(teamId, 'Philadelphia', 'Flyers', "PHI");
       case 8:
-        return new Team(teamId, 'Winnipeg', 'Jets', 52);
+        return new Team(teamId, 'Winnipeg', 'Jets', "WPG");
       case 9:
-        return new Team(teamId, 'Florida', 'Panthers', 13);
+        return new Team(teamId, 'Florida', 'Panthers', "FLA");
       case 10:
-        return new Team(teamId, 'Tampa Bay', 'Lightning', 14);
+        return new Team(teamId, 'Tampa Bay', 'Lightning', "TBL");
       case 11:
-        return new Team(teamId, 'NYR', 'Rangers', 3);
+        return new Team(teamId, 'NYR', 'Rangers', "NYR");
       case 12:
-        return new Team(teamId, 'NYI', 'Islanders', 2);
+        return new Team(teamId, 'NYI', 'Islanders', "NYI");
       case 13:
-        return new Team(teamId, 'New Jersey', 'Devils', 1);
+        return new Team(teamId, 'New Jersey', 'Devils', "NJD");
       case 14:
-        return new Team(teamId, 'Washington', 'Capitals', 15);
+        return new Team(teamId, 'Washington', 'Capitals', "WSH");
       case 15:
-        return new Team(teamId, 'Carolina', 'Hurricanes', 12);
+        return new Team(teamId, 'Carolina', 'Hurricanes', "CAR");
       case 16:
-        return new Team(teamId, 'Dallas', 'Stars', 25);
+        return new Team(teamId, 'Dallas', 'Stars', "DAL");
       case 17:
-        return new Team(teamId, 'Chicago', 'Blackhawks', 16);
+        return new Team(teamId, 'Chicago', 'Blackhawks', "CHI");
       case 18:
-        return new Team(teamId, 'San Jose', 'Sharks', 28);
+        return new Team(teamId, 'San Jose', 'Sharks', "SJS");
       case 19:
-        return new Team(teamId, 'St. Louis', 'Blues', 19);
+        return new Team(teamId, 'St. Louis', 'Blues', "STL");
       case 20:
-        return new Team(teamId, 'Vancouver', 'Canucks', 23);
+        return new Team(teamId, 'Vancouver', 'Canucks', "VAN");
       case 21:
-        return new Team(teamId, 'Columbus', 'Blue Jackets', 29);
+        return new Team(teamId, 'Columbus', 'Blue Jackets', "CBJ");
       case 22:
-        return new Team(teamId, 'Detroit', 'Red Wings', 17);
+        return new Team(teamId, 'Detroit', 'Red Wings', "DET");
       case 23:
-        return new Team(teamId, 'Colorado', 'Avalanche', 21);
+        return new Team(teamId, 'Colorado', 'Avalanche', "COL");
       case 24:
-        return new Team(teamId, 'Calgary', 'Flames', 20);
+        return new Team(teamId, 'Calgary', 'Flames', "CGY");
       case 25:
-        return new Team(teamId, 'Edmonton', 'Oilers', 22);
+        return new Team(teamId, 'Edmonton', 'Oilers', "EDM");
       case 26:
-        return new Team(teamId, 'Phoenix', 'Coyotes', 53);
+        return new Team(teamId, 'Phoenix', 'Coyotes', "UTA");
       case 27:
-        return new Team(teamId, 'Anaheim', 'Ducks', 24);
+        return new Team(teamId, 'Anaheim', 'Ducks', "ANA");
       case 28:
-        return new Team(teamId, 'Los Angeles', 'Kings', 26);
+        return new Team(teamId, 'Los Angeles', 'Kings', "LAK");
       case 29:
-        return new Team(teamId, 'Nashville', 'Predators', 18);
+        return new Team(teamId, 'Nashville', 'Predators', "NSH");
       case 30:
-        return new Team(teamId, 'Minnesota', 'Wild', 30);
+        return new Team(teamId, 'Minnesota', 'Wild', "MIN");
       case 31:
-        return new Team(teamId, 'Vegas', 'Golden Knights', 54);
+        return new Team(teamId, 'Vegas', 'Golden Knights', "VGK");
       case 32:
-        return new Team(teamId, 'Seattle', 'Kraken', 55);
+        return new Team(teamId, 'Seattle', 'Kraken', "SEA");
       case 33:
-        return new Team(teamId, 'Agent Libres','Libre', 60);
+        return new Team(teamId, 'Agent Libres','Libre', "NHL");
       default:
-        return new Team(teamId, 'Unknown', 'Team', 0);
+        return new Team(teamId, 'Unknown', 'Team', "NHL");
     }
   }
 

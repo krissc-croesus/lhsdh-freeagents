@@ -19,7 +19,7 @@ const formatter = new Intl.NumberFormat('fr-CA', {
 })
 
 export class NegotiationsComponent implements OnInit {
-  storageKey: string = 'LHSDB-FA-2023';
+  storageKey: string = 'LHSDB-FA-2024';
   allPlayers: Player[] = [];
   playersWithOfferIds: number[] = [];
   offersMade: Offer[] = [];

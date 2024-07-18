@@ -2,9 +2,9 @@ export class Team {
   teamID: number;
   teamName: string;
   teamCity: string;
-  logoId: number;
+  logoId: string;
 
-  constructor( teamID: number, teamCity: string, teamName: string, logoID: number){
+  constructor( teamID: number, teamCity: string, teamName: string, logoID: string){
     this.teamID = teamID;
     this.teamCity = teamCity;
     this.teamName = teamName;

@@ -17,25 +17,22 @@ export class PlayerDetailComponent implements OnInit {
   constructor(
     private offerService: OffersService,
     private alertService: AlertServiceService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   getHeaderBackgroundImageUrl() {
-    const teamLogoURL =
-      'https://www-league.nhlstatic.com/images/logos/teams-current-primary-dark/' +
-      this.player.team.logoId +
-      '.svg';
+    const teamLogoURL = 'https://assets.nhle.com/logos/nhl/svg/' + this.player.team.logoId + '_dark.svg';
     return `url(${teamLogoURL})`;
   }
 
   getPlayerFaceImage() {
     const nhlAvatarsURL =
-      'https://cms.nhl.bamgrid.com/images/headshots/current/168x168/';
+      'https://assets.nhle.com/mugs/nhl/latest/';
     var playerID = this.player.URLLink.substring(
       this.player.URLLink.lastIndexOf('/') + 1
     );
-    const playerAvatarURL = nhlAvatarsURL + playerID + '.jpg';
+    const playerAvatarURL = nhlAvatarsURL + playerID + '.png';
 
     return playerAvatarURL;
   }
@@ -54,7 +51,7 @@ export class PlayerDetailComponent implements OnInit {
           this.setSendBtnEnabled(true);
           this.alertService.showErrorMsg("Une erreur s'est produite. Veuillez réessayer");
         }
-        else{
+        else {
           this.alertService.showConfirmMsg('Vous avez offert un contrat à ' + this.player.name);
         }
       } else {
@@ -63,12 +60,12 @@ export class PlayerDetailComponent implements OnInit {
     }
   }
 
-  releasePlayer(){
+  releasePlayer() {
     this.setSendBtnEnabled(false);
     if (!this.offerService.sendNewContractOffer(this.player, 0, true)) {
       this.setSendBtnEnabled(true);
       this.alertService.showErrorMsg("Une erreur s'est produite. Veuillez réessayer");
-    }else{
+    } else {
       this.alertService.showConfirmMsg('Vous avez libéré ' + this.player.name);
     }
   }
