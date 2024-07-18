@@ -17,7 +17,7 @@ export class TablePlayerDetailComponent implements OnInit {
 
   getPlayerFaceImage() {
     const nhlAvatarsURL =
-      'https://cms.nhl.bamgrid.com/images/headshots/current/168x168/';
+      'https://assets.nhle.com/mugs/nhl/latest/';
 
     if(this.player.URLLink == null)
     {
@@ -28,17 +28,14 @@ export class TablePlayerDetailComponent implements OnInit {
     var playerID = this.player.URLLink.substring(
       this.player.URLLink.lastIndexOf('/') + 1
     );
-    const playerAvatarURL = nhlAvatarsURL + playerID + '.jpg';
+    const playerAvatarURL = nhlAvatarsURL + playerID + '.png';
 
     return playerAvatarURL;
   }
 
   getHeaderBackgroundImageUrl() {
-    const teamLogoURL =
-      'https://www-league.nhlstatic.com/images/logos/teams-current-primary-dark/' +
-      this.player.team.logoId +
-      '.svg';
-    return `url(${teamLogoURL})`;
+    const teamLogoURL = 'https://assets.nhle.com/logos/nhl/svg/' + this.player.team.logoId + '_dark.svg';
+    return teamLogoURL;
   }
 
   isButtonDisabled() {
@@ -46,7 +43,7 @@ export class TablePlayerDetailComponent implements OnInit {
   }
 
   onStartNegociations() {
-    const storageKey = 'LHSDB-FA-2023';
+    const storageKey = 'LHSDB-FA-2024';
     var currentNegociations = [];
     var savedNegociations = JSON.parse(localStorage.getItem(storageKey));
 
@@ -64,4 +61,5 @@ export class TablePlayerDetailComponent implements OnInit {
     localStorage.setItem(storageKey, JSON.stringify(currentNegociations));
     this.alertService.showConfirmMsg(this.player.name + " a été ajouté à votre liste de négociations.");
   }
+  
 }

@@ -85,7 +85,7 @@ export class PlayerResultComponent implements OnInit {
       const offer = this.offers[index];
       if(!offer.isOwner){
         var newDifference = Math.abs(this.average - offer.amount);
-        console.log("New Diff= " + newDifference);
+        console.log(offer.playerName+ " New Diff= " + newDifference);
         if (newDifference === smallestDiff) {
           this.winners.push(offer.teamId);
         }
@@ -127,20 +127,17 @@ export class PlayerResultComponent implements OnInit {
 
   getPlayerFaceImage() {
     const nhlAvatarsURL =
-      'https://cms.nhl.bamgrid.com/images/headshots/current/168x168/';
+      'https://assets.nhle.com/mugs/nhl/latest/';
     var playerID = this.player.URLLink.substring(
       this.player.URLLink.lastIndexOf('/') + 1
     );
-    const playerAvatarURL = nhlAvatarsURL + playerID + '.jpg';
+    const playerAvatarURL = nhlAvatarsURL + playerID + '.png';
 
     return playerAvatarURL;
   }
 
   getHeaderBackgroundImageUrl() {
-    const teamLogoURL =
-      'https://www-league.nhlstatic.com/images/logos/teams-current-primary-dark/' +
-      this.player.team.logoId +
-      '.svg';
+    const teamLogoURL = 'https://assets.nhle.com/logos/nhl/svg/' + this.player.team.logoId + '_dark.svg';
     return teamLogoURL;
   }
 }

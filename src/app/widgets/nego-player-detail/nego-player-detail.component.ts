@@ -16,7 +16,7 @@ export class NegoPlayerDetailComponent implements OnInit {
   @Input() nbOffers: number;
   @ViewChild('offerSender') offerSenderWidget: OfferSenderComponent;
   isSendBtnDisabled: boolean = false;
-  storageKey: string = 'LHSDB-FA-2023';
+  storageKey: string = 'LHSDB-FA-2024';
 
   constructor(
     private offerService: OffersService,
@@ -28,21 +28,19 @@ export class NegoPlayerDetailComponent implements OnInit {
   ngOnInit(): void {}
 
   getPlayerFaceImage() {
+
     const nhlAvatarsURL =
-      'https://cms.nhl.bamgrid.com/images/headshots/current/168x168/';
+      'https://assets.nhle.com/mugs/nhl/latest/';
     var playerID = this.player.URLLink.substring(
       this.player.URLLink.lastIndexOf('/') + 1
     );
-    const playerAvatarURL = nhlAvatarsURL + playerID + '.jpg';
+    const playerAvatarURL = nhlAvatarsURL + playerID + '.png';
 
     return playerAvatarURL;
   }
 
   getHeaderBackgroundImageUrl() {
-    const teamLogoURL =
-      'https://www-league.nhlstatic.com/images/logos/teams-current-primary-dark/' +
-      this.player.team.logoId +
-      '.svg';
+    const teamLogoURL = 'https://assets.nhle.com/logos/nhl/svg/' + this.player.team.logoId + '_dark.svg';
     return teamLogoURL;
   }
 
