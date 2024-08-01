@@ -55,7 +55,7 @@ export class PlayerResultComponent implements OnInit {
 
     if (amounts.length > 0) {
       const result = average(amounts);
-      this.average = Math.round(result);
+      this.average = result;
     }
 
     if(this.ownerOffer >= this.average){
