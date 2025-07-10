@@ -97,7 +97,7 @@ export class PlayerMapperService {
       case 25:
         return new Team(teamId, 'Edmonton', 'Oilers', "EDM");
       case 26:
-        return new Team(teamId, 'Phoenix', 'Coyotes', "UTA");
+        return new Team(teamId, 'Utah', 'Mammoth', "UTA");
       case 27:
         return new Team(teamId, 'Anaheim', 'Ducks', "ANA");
       case 28:
