@@ -1,6 +1,16 @@
-# LhsdbFreeagents
+# LHSDB Free Agents
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
+This project is a web application for managing free agents for a sports league, likely the LHSDB. It allows users to view all available free agents, manage their own free agents, handle negotiations and offers, and track team salary caps.
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.3.
+
+## Key Technologies Used
+
+*   **Angular 14**: The core framework for building the application.
+*   **Angular Material**: For UI components.
+*   **Bootstrap**: For styling and layout.
+*   **AWS Amplify**: For backend integration (e.g., authentication, API).
+*   **NGX Spinner**: To display loading indicators.
 
 ## Development server
 
@@ -24,4 +34,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 ## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](httpss://github.com/angular/angular-cli/blob/master/README.md).
