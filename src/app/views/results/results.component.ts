@@ -67,6 +67,8 @@ export class ResultsComponent implements OnInit {
     }
     this.maxUFA = this.allUFAs.length;
     this.filter();
+    
+    // this.maxUFA = this.allRFAs.length;
     //this.filterRFA();
   }
 
@@ -109,7 +111,8 @@ export class ResultsComponent implements OnInit {
       this.pageEnd = this.maxUFA;
     }
 
-    this.filter();
+        //this.filter();
+    this.filterRFA();
   }
 
   previousPage() {
@@ -124,7 +127,8 @@ export class ResultsComponent implements OnInit {
       this.pageStart = 0;
     }
 
-    this.filter();
+        //this.filter();
+    this.filterRFA();
   }
 
 }
