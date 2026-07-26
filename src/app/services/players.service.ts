@@ -11,8 +11,7 @@ import { PlayerMapperService } from './player-mapper.service';
 })
 export class PlayersService {
   // PLAYER_RESSOURCE_URL = 'https://localhost:44351/players';
-  // PLAYER_RESSOURCE_URL = 'https://lhsdb-fa-api.piriwin.com/players';
-  PLAYER_RESSOURCE_URL = 'http://lhsdbfreeagents2020-prod.eba-qize9grt.us-east-2.elasticbeanstalk.com/players';
+  PLAYER_RESSOURCE_URL = 'https://lhsdb-fa-api.piriwin.com/players';
 
   constructor(
     private restClient: HttpClient,
