@@ -22,6 +22,7 @@ export class OffersService {
     isOwner: boolean
   ): Promise<boolean> {
     var success: boolean = false;
+    
     await Auth.currentUserInfo()
       .then((info) => {
         const team = info.attributes['custom:team'];
