@@ -10,7 +10,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class OffersService {
-  OFFERS_RESSOURCE_URL = 'https://lhsdb-fa-api.piriwin.com/offers';
+  // OFFERS_RESSOURCE_URL = 'https://lhsdb-fa-api.piriwin.com/offers'; 
+  OFFERS_RESSOURCE_URL = 'http://lhsdbfreeagents2020-prod.eba-qize9grt.us-east-2.elasticbeanstalk.com/offers';
   //OFFERS_RESSOURCE_URL = 'https://localhost:44351/offers';
 
   constructor(private restClient: HttpClient) { }
@@ -21,7 +22,6 @@ export class OffersService {
     isOwner: boolean
   ): Promise<boolean> {
     var success: boolean = false;
-    /*
     await Auth.currentUserInfo()
       .then((info) => {
         const team = info.attributes['custom:team'];
@@ -50,8 +50,8 @@ export class OffersService {
       })
       .catch(() => {
         console.log('Not signed in');
-      });*/
-    window.alert("Le marché des agents libres est maintenant fermé");
+      });
+    // window.alert("Le marché des agents libres est maintenant fermé");
     return false;
   }
 
@@ -93,8 +93,8 @@ export class OffersService {
   }
 
   removeOffer(playerId: number): Observable<any> {
-    // return this.restClient.delete(this.OFFERS_RESSOURCE_URL + "/" + playerId);
-     window.alert("Le marché des agents libres est maintenant fermé");
-     return;
+     return this.restClient.delete(this.OFFERS_RESSOURCE_URL + "/" + playerId);
+     // window.alert("Le marché des agents libres est maintenant fermé");
+     //return;
   }
 }
