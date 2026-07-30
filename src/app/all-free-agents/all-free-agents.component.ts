@@ -51,7 +51,7 @@ export class AllFreeAgentsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   connectedUserTeam: number = 0;
 
-  // Choix offerts dans les listes de filtres, batis a partir des joueurs charges
+  // Choix offerts dans les listes de filtres, bâtis à partir des joueurs chargés
   teamOptions: Team[] = [];
   positionOptions: string[] = [];
   statusOptions: string[] = [];
