@@ -15,10 +15,28 @@ th.mat-sort-header-sorted {
   background-color: rgb(62, 62, 62);
 }
 
+.filters-row{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
 .players-filter{
-  width: 100%;
+  flex: 1 1 200px;
+  min-width: 160px;
   padding-top: 16px;
   padding-bottom: 3px;
+}
+
+.search-filter{
+  flex: 2 1 280px;
+}
+
+.filters-summary{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 8px;
 }
 
 /*.mat-row:nth-child(odd) {

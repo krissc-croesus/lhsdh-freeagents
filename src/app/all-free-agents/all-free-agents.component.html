@@ -1,8 +1,37 @@
 <div class="container-xl">
-  <mat-form-field class="players-filter" autocomplete="off">
-    <mat-label>Recherche</mat-label>
-    <input matInput type="text" (keyup)="applyFilter($event)" placeholder="Recherchez par équipe ou nom de joueur" autocomplete="off" #input>
-  </mat-form-field>
+  <div class="filters-row">
+    <mat-form-field class="players-filter search-filter" autocomplete="off">
+      <mat-label>Recherche</mat-label>
+      <input matInput type="text" [(ngModel)]="searchText" (keyup)="applyFilters()" placeholder="Recherchez par équipe ou nom de joueur" autocomplete="off">
+    </mat-form-field>
+
+    <mat-form-field class="players-filter">
+      <mat-label>&Eacute;quipe</mat-label>
+      <mat-select multiple [(ngModel)]="selectedTeamIds" (selectionChange)="applyFilters()">
+        <mat-option [value]="team.teamID" *ngFor="let team of teamOptions">{{ team.teamCity }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="players-filter">
+      <mat-label>Position</mat-label>
+      <mat-select multiple [(ngModel)]="selectedPositions" (selectionChange)="applyFilters()">
+        <mat-option [value]="position" *ngFor="let position of positionOptions">{{ position }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="players-filter">
+      <mat-label>Statut</mat-label>
+      <mat-select multiple [(ngModel)]="selectedStatuses" (selectionChange)="applyFilters()">
+        <mat-option [value]="status" *ngFor="let status of statusOptions">{{ status }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="filters-summary">
+    <span>{{ dataSource.filteredData.length }} joueur(s)</span>
+    <button mat-button color="primary" *ngIf="hasActiveFilters" (click)="resetFilters()">R&eacute;initialiser les filtres</button>
+  </div>
+
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
 

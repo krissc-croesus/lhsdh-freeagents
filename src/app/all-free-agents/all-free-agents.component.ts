@@ -7,11 +7,19 @@ import {
   trigger,
 } from '@angular/animations';
 import { Player } from '../models/player';
+import { Team } from '../models/team';
 import { PlayersService } from '../services/players.service';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Auth } from 'aws-amplify';
 import { AlertServiceService } from '../services/alert-service.service';
+
+interface FilterCriteria {
+  text: string;
+  teamIds: number[];
+  positions: string[];
+  statuses: string[];
+}
 
 @Component({
   selector: 'app-all-free-agents',
@@ -43,6 +51,17 @@ export class AllFreeAgentsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   connectedUserTeam: number = 0;
 
+  // Choix offerts dans les listes de filtres, batis a partir des joueurs charges
+  teamOptions: Team[] = [];
+  positionOptions: string[] = [];
+  statusOptions: string[] = [];
+
+  // Filtres actuellement selectionnes
+  searchText: string = '';
+  selectedTeamIds: number[] = [];
+  selectedPositions: string[] = [];
+  selectedStatuses: string[] = [];
+
   constructor(private playerService: PlayersService, private alertService: AlertServiceService) {
     Auth.currentUserInfo()
     .then((info) => {
@@ -53,6 +72,7 @@ export class AllFreeAgentsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.setupFilterPredicate();
     this.playerService.getFreeAgents().subscribe(
       (players) => {
         players.sort((a: Player, b: Player) => {
@@ -65,13 +85,8 @@ export class AllFreeAgentsComponent implements OnInit, AfterViewInit {
           return a.team.teamCity.localeCompare(b.team.teamCity);
         });
         this.dataSource.data = players as Player[];
-        this.dataSource.filterPredicate = (data: Player, filter: string) => {
-          return (
-            data.name.toLowerCase().includes(filter) ||
-            data.teamCity.toLowerCase().includes(filter) ||
-            data.position.toLowerCase().includes(filter)
-          );
-        };
+        this.buildFilterOptions(players as Player[]);
+        this.applyFilters();
       },
       (error) => {
         this.alertService.showErrorMsg("Nous n'avons pas réussi a charger les agents libres. Contacter Kriss");
@@ -83,8 +98,96 @@ export class AllFreeAgentsComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  // Un filtre vide n'impose aucune contrainte : les criteres actifs se cumulent (ET).
+  private setupFilterPredicate(): void {
+    this.dataSource.filterPredicate = (data: Player, filter: string) => {
+      const criteria: FilterCriteria = JSON.parse(filter);
+
+      if (
+        criteria.teamIds.length > 0 &&
+        (!data.team || criteria.teamIds.indexOf(data.team.teamID) === -1)
+      ) {
+        return false;
+      }
+
+      if (
+        criteria.positions.length > 0 &&
+        criteria.positions.indexOf(data.position) === -1
+      ) {
+        return false;
+      }
+
+      if (
+        criteria.statuses.length > 0 &&
+        criteria.statuses.indexOf(data.status) === -1
+      ) {
+        return false;
+      }
+
+      if (criteria.text) {
+        const searchable = [data.name, data.teamCity, data.position]
+          .filter((value) => !!value)
+          .join(' ')
+          .toLowerCase();
+        return searchable.includes(criteria.text);
+      }
+
+      return true;
+    };
+  }
+
+  applyFilters(): void {
+    const criteria: FilterCriteria = {
+      text: this.searchText.trim().toLowerCase(),
+      teamIds: this.selectedTeamIds,
+      positions: this.selectedPositions,
+      statuses: this.selectedStatuses,
+    };
+    this.dataSource.filter = JSON.stringify(criteria);
+  }
+
+  resetFilters(): void {
+    this.searchText = '';
+    this.selectedTeamIds = [];
+    this.selectedPositions = [];
+    this.selectedStatuses = [];
+    this.applyFilters();
+  }
+
+  get hasActiveFilters(): boolean {
+    return (
+      this.searchText.trim().length > 0 ||
+      this.selectedTeamIds.length > 0 ||
+      this.selectedPositions.length > 0 ||
+      this.selectedStatuses.length > 0
+    );
+  }
+
+  // On n'offre que les valeurs reellement presentes chez les agents libres,
+  // ce qui evite les choix qui ne ramenent aucun joueur.
+  private buildFilterOptions(players: Player[]): void {
+    const teams = new Map<number, Team>();
+    const positions = new Set<string>();
+    const statuses = new Set<string>();
+
+    players.forEach((player) => {
+      if (player.team) {
+        teams.set(player.team.teamID, player.team);
+      }
+      if (player.position) {
+        positions.add(player.position);
+      }
+      if (player.status) {
+        statuses.add(player.status);
+      }
+    });
+
+    this.teamOptions = Array.from(teams.values()).sort((a, b) =>
+      a.teamCity.localeCompare(b.teamCity)
+    );
+    this.positionOptions = Array.from(positions).sort((a, b) =>
+      a.localeCompare(b)
+    );
+    this.statusOptions = Array.from(statuses).sort((a, b) => a.localeCompare(b));
   }
 }
