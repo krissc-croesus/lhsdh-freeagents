@@ -1,20 +1,33 @@
 <div class="container">
+  <span #pageTop></span>
   <h1 class="display-1 page-title"> Résultats</h1>
-  <mat-divider>UFA</mat-divider>
-  <app-player-result *ngFor="let player of filteredUFAs" [player]="player"></app-player-result>
+
+  <div class="status-toggle-row">
+    <mat-button-toggle-group [value]="selectedStatus" (change)="selectStatus($event.value)">
+      <mat-button-toggle value="UFA">UFA ({{ allUFAs.length }})</mat-button-toggle>
+      <mat-button-toggle value="RFA">RFA ({{ allRFAs.length }})</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <app-player-result *ngFor="let player of filteredPlayers" [player]="player"></app-player-result>
+
+  <div class="empty-message" *ngIf="filteredPlayers.length === 0">
+    Aucun joueur {{ selectedStatus }} &agrave; afficher.
+  </div>
+
   <mat-toolbar>
     <div class="button-row">
       <button mat-fab color="primary" #tooltip="matTooltip" matTooltip="Page Précédente" [matTooltipPosition]="'right'"
-        matTooltipHideDelay="1000" (click)="previousPage()">
+        matTooltipHideDelay="1000" [disabled]="pageStart === 0" (click)="previousPage()">
         <mat-icon>navigate_before</mat-icon>
       </button>
       <button mat-fab color="primary" #tooltip="matTooltip" matTooltip="Page Suivante" [matTooltipPosition]="'right'"
-        matTooltipHideDelay="1000" (click)="nextPage()">
+        matTooltipHideDelay="1000" [disabled]="pageEnd >= maxPlayers" (click)="nextPage()">
         <mat-icon>navigate_next</mat-icon>
       </button>
+      <span class="page-indicator" *ngIf="maxPlayers > 0">{{ pageStart + 1 }} - {{ pageEnd }} de {{ maxPlayers }}</span>
     </div>
   </mat-toolbar>
-  <mat-divider>RFA</mat-divider> 
   <br/>
   <br/>
   <br/>

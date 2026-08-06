@@ -58,12 +58,17 @@ export class PlayerResultComponent implements OnInit {
       this.average = result;
     }
 
-    if(this.ownerOffer >= this.average){
+    if (this.ownerOffer >= this.average) {
       this.winners.push(this.player.team.teamID);
       this.ownerWins = true;
-    }else {
+    } else {
       this.ownerWins = false;
-      this.findWinners();
+
+      if (this.player.status === 'UFA') {
+        this.findWinners();
+      } else if (this.player.status === 'RFA') {
+        this.findRFAWinners();
+      }
     }
   }
 
@@ -91,8 +96,31 @@ export class PlayerResultComponent implements OnInit {
         }
       }
     }
+  }
 
+  findRFAWinners() {
+    var highestOffer = 0;
 
+    for (let index = 0; index < this.offers.length; index++) {
+      const offer = this.offers[index];
+      if(!offer.isOwner){
+        var amount = offer.amount;
+        if (amount > highestOffer) {
+          highestOffer = amount;
+        }
+      }
+    }
+    console.log("highestOffer= " + highestOffer);
+
+    for (let index = 0; index < this.offers.length; index++) {
+      const offer = this.offers[index];
+      if(!offer.isOwner){
+        var amount = offer.amount;
+        if (amount === highestOffer) {
+          this.winners.push(offer.teamId);
+        }
+      }
+    }
   }
 
   getWinners(){

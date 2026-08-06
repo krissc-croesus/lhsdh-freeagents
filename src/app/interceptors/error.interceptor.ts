@@ -40,7 +40,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
             // err.error is not null, if the ResponsenEntity contains an Exception
             // err.error.message will give the custom message send from the server
-            const error = err.error.message || err.statusText;
+            const error = err.error?.message || err.statusText;
             return throwError(error);
 
         }))

@@ -42,13 +42,9 @@ export class SalaryScaleService {
       case ovk >= 75 && ovk <= 76:
         return { min: 2000000, max: 3000000 };
       case ovk >= 73 && ovk <= 74:
-        return { min: 1500000, max: 2000000 };
-      case ovk >= 71 && ovk <= 72:
-        return { min: 1000000, max: 1500000 };
-      case ovk >= 69 && ovk <= 70:
-        return { min: 750000, max: 1000000 };
-      case ovk >= 65 && ovk <= 68:
-        return { min: 500000, max: 750000 };
+        return { min: 1000000, max: 2000000 };
+      case ovk >= 65 && ovk <= 72:
+        return { min: 500000, max: 1000000 };
       case ovk < 65:
         return { min: 300000, max: 500000 };
 
