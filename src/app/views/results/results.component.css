@@ -6,6 +6,23 @@
   text-align: center;
 }
 
+.status-toggle-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2%;
+}
+
+.empty-message {
+  text-align: center;
+  margin: 3% 0;
+  font-size: 20px;
+}
+
+.page-indicator {
+  margin-left: 16px;
+  font-size: 16px;
+}
+
 .button-row {
   display: table-cell;
   width: 490px;

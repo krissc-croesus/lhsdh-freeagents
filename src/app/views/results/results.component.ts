@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Player } from 'src/app/models/player';
 import { AlertServiceService } from 'src/app/services/alert-service.service';
-import { OffersService } from 'src/app/services/offers.service';
 import { PlayersService } from 'src/app/services/players.service';
 
 @Component({
@@ -10,18 +9,21 @@ import { PlayersService } from 'src/app/services/players.service';
   styleUrls: ['./results.component.css']
 })
 export class ResultsComponent implements OnInit {
+  @ViewChild('pageTop') pageTop: ElementRef;
+
   freeAgentsDataSource: Player[] = [];
   allRFAs: Player[] = [];
   allUFAs: Player[] = [];
 
-  filteredUFAs: Player[] = [];
-  filteredRFAs: Player[] = [];
+  filteredPlayers: Player[] = [];
 
+  selectedStatus: string = 'UFA';
+
+  pageSize: number = 20;
   pageStart: number = 0;
-  pageEnd: number = 20;
-  maxUFA: number = 0;
+  pageEnd: number = 0;
 
-  constructor(private playerService: PlayersService, private alertService: AlertServiceService, private offerService: OffersService) { }
+  constructor(private playerService: PlayersService, private alertService: AlertServiceService) { }
 
   ngOnInit(): void {
     this.fetchAllFreeAgents();
@@ -53,66 +55,83 @@ export class ResultsComponent implements OnInit {
       }
     );
   }
+
   split() {
+    this.allUFAs = [];
+    this.allRFAs = [];
+
     for (let index = 0; index < this.freeAgentsDataSource.length; index++) {
       const player = this.freeAgentsDataSource[index];
 
       if (player.status === 'UFA') {
-        // if(this.allUFAs.length < 10){
         this.allUFAs.push(player);
-        //}
       } else if (player.status === 'RFA') {
         this.allRFAs.push(player);
       }
     }
-    this.maxUFA = this.allUFAs.length;
-    this.filter();
-    
-    // this.maxUFA = this.allRFAs.length;
-    //this.filterRFA();
+
+    this.goToFirstPage();
   }
 
-  filter() {
-    this.filteredUFAs = []
-    for (let index = this.pageStart; index < this.pageEnd; index++) {
-      const ufa = this.allUFAs[index];
-
-      this.filteredUFAs.push(ufa);
-    }
+  get activePlayers(): Player[] {
+    return this.selectedStatus === 'RFA' ? this.allRFAs : this.allUFAs;
   }
 
-  filterRFA() {
-    this.allRFAs.forEach(
-      (player) => {
-        this.offerService.getOffersForPlayer(player.uniqueID).subscribe(
-          (offers) => {
-            if (offers?.length > 0) {
-              this.filteredRFAs.push(player);
-            }
-          },
-          (error) => {
-            console.error("Error retrieving RFA offers:" + error);
-          }
-        );
-      }
-    );
+  get maxPlayers(): number {
+    return this.activePlayers.length;
   }
 
-  nextPage() {
-
-    if (this.pageEnd === this.maxUFA) {
+  selectStatus(status: string) {
+    if (status == null || status === this.selectedStatus) {
       return;
     }
 
-    this.pageStart += 20;
-    this.pageEnd += 20;
+    this.selectedStatus = status;
+    this.goToFirstPage();
+    this.scrollToTop();
+  }
 
-    if (this.pageEnd > this.maxUFA) {
-      this.pageEnd = this.maxUFA;
+  // Le conteneur qui défile est le mat-sidenav-content, pas la fenêtre, donc
+  // window.scrollTo n'aurait aucun effet. On remonte les parents jusqu'au
+  // premier conteneur défilable au lieu de coder le sélecteur en dur.
+  // (Chrome ignore behavior:'smooth' sur ce conteneur, d'où le saut instantané.)
+  scrollToTop() {
+    let element: HTMLElement = this.pageTop?.nativeElement.parentElement;
+
+    while (element != null) {
+      const overflowY = getComputedStyle(element).overflowY;
+
+      if (element.scrollHeight > element.clientHeight && (overflowY === 'auto' || overflowY === 'scroll')) {
+        element.scrollTop = 0;
+        return;
+      }
+
+      element = element.parentElement;
     }
 
-        //this.filter();
-    this.filterRFA();
+    window.scrollTo(0, 0);
+  }
+
+  goToFirstPage() {
+    this.pageStart = 0;
+    this.pageEnd = Math.min(this.pageSize, this.maxPlayers);
+    this.filter();
+  }
+
+  filter() {
+    this.filteredPlayers = this.activePlayers.slice(this.pageStart, this.pageEnd);
+  }
+
+  nextPage() {
+    if (this.pageEnd >= this.maxPlayers) {
+      return;
+    }
+
+    this.pageStart += this.pageSize;
+    this.pageEnd = Math.min(this.pageEnd + this.pageSize, this.maxPlayers);
+
+    this.filter();
+    this.scrollToTop();
   }
 
   previousPage() {
@@ -120,15 +139,11 @@ export class ResultsComponent implements OnInit {
       return;
     }
 
-    this.pageStart -= 20;
-    this.pageEnd -= 20;
+    this.pageStart = Math.max(this.pageStart - this.pageSize, 0);
+    this.pageEnd = Math.min(this.pageStart + this.pageSize, this.maxPlayers);
 
-    if (this.pageStart < 0) {
-      this.pageStart = 0;
-    }
-
-        //this.filter();
-    this.filterRFA();
+    this.filter();
+    this.scrollToTop();
   }
 
 }

@@ -25,6 +25,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 
 import { LoginComponent } from './views/login/login.component';
@@ -91,6 +92,7 @@ import { ResultsComponent } from './views/results/results.component';
     MatSnackBarModule,
     MatSelectModule,
     MatProgressSpinnerModule,
+    MatButtonToggleModule,
     // Amplify
     AmplifyUIAngularModule
   ],
